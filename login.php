@@ -14,17 +14,17 @@
             $username=$_POST['username'];
             $password=$_POST['password'];
             // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-            $con = mysqli_connect($dbhost, $dbusername, $dbpassword);
+            $con = mysql_connect($dbhost, $dbusername, $dbpassword);
             // To protect MySQL injection for Security purpose
             $username = stripslashes($username);
             $password = stripslashes($password);
             $username = mysql_real_escape_string($username);
             $password = mysql_real_escape_string($password);
             // Selecting Database
-            $db = mysqli_select_db($dbdatabase, $con);
+            $db = mysql_select_db($dbdatabase, $con);
             // SQL query to fetch information of registerd users and finds user match.
-            $query = mysqli_query("select * from login where password='$password' AND username='$username'", $con);
-            $rows = mysqli_num_rows($query);
+            $query = mysql_query("select * from login where password='$password' AND username='$username'", $con);
+            $rows = mysql_num_rows($query);
             if ($rows == 1) {
                     $_SESSION['login_user']=$username; // Initializing Session
                     header("location: profile.php"); // Redirecting To Other Page
@@ -33,6 +33,6 @@
                     {
                             $error = "Username or Password is invalid";
                     }
-                    mysqli_close($con); // Closing Connection
+                    mysql_close($con); // Closing Connection
         }
     }
