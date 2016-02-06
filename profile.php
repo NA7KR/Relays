@@ -1,6 +1,12 @@
 <?php
     include('config.php');
     include('session.php');
+	$GLOBALS['$r1_on_state'] = 'Yellow';
+	$GLOBALS['$r1_off_state'] = 'Red';
+	$GLOBALS['$r2-on-state'] = 'enable';
+	$GLOBALS['$r2-off-state'] = 'disabled';
+	$GLOBALS['$r3-on-state'] = 'enable';
+	$GLOBALS['$r3-off-state'] = 'disabled';
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,8 +23,8 @@
             <br>
             <table style="width">
                 <tr>
-                    <td><input type="submit" name="r1-on" value="on"></td>
-                    <td><input type="submit" name="r1-off" value="off"></td> 
+                    <td><input type="submit" name="r1-on" value="on"</td>
+                    <td><input type="submit" name="r1-off" value="off"</td> 
                     <td>Relay 1</td>
                 </tr>
                 <tr>
@@ -60,6 +66,10 @@
                     <td><input type="submit" name="r9-on" value="on"></td>
                     <td><input type="submit" name="r9-off" value="off"></td> 
                     <td>Relay All</td>
+                </tr>
+				<tr>
+                    <td><input type="submit" name="query" value="on"></td> 
+                    <td>Query</td>
                 </tr>
             </table> 			 
         </form>
@@ -119,6 +129,9 @@
     }
     if(isset($_GET['r9-off'])) {
         sendCommand(248,128,$debug);
+    }
+	if(isset($_GET['query'])) {
+        sendCommand(255,255,$debug); //FD 02 20 FF FF 5D
     }
 
     function sendCommand($relay,$state,$debug)
@@ -198,11 +211,13 @@
                         echo "Relay All off <br>";
                         break;
                     default:
-                        echo "";
+                        state($bin);
                     }
-                echo $bin;
+                echo $bin . "<br>";
+				
             }
             return $bin;
+		
 	}
 	
     function hexToBin($hex) 
@@ -213,4 +228,90 @@
             $bin .= str_pad(decbin(ord($hex[$i])),8,'0',STR_PAD_LEFT);
             return $bin;
 	} 
+	
+	function state($bin)
+	{
+		$rest = substr($bin, -1); 
+		if ($rest == "1") 
+		{
+			echo "Relay 3 on <br>" ;
+		}
+		else
+			{
+				echo "Relay 1 off <br>" ;
+			}
+			
+		$rest = substr($bin, -2, 1); 
+		if ($rest == "1") 
+		{
+			echo "Relay 2 on <br>" ;
+		}
+		else
+			{
+				echo "Relay 2 off <br>" ;
+			}
+			
+		$rest = substr($bin, -3, 1);
+		if ($rest == "1") 
+		{
+			echo "Relay 3 on <br>" ;
+	
+		}
+		else
+			{
+				echo "Relay 3 off <br>" ;
+			}
+			
+		$rest = substr($bin, -4, 1); 
+		if ($rest == "1") 
+		{
+			echo "Relay 4 on <br>" ;
+		}
+		else
+			{
+				echo "Relay 4 off <br>" ;
+			}
+			
+		$rest = substr($bin, -5, 1); 
+		if ($rest == "1") 
+		{
+			echo "Relay 5 on <br>" ;
+		}
+		else
+			{
+				echo "Relay 5 off <br>" ;
+			}
+			
+		$rest = substr($bin, -6, 1);
+		if ($rest == "1") 
+		{
+			echo "Relay 6 on <br>" ;
+	
+		}
+		else
+			{
+				echo "Relay 6 off <br>" ;
+			}
+		
+		$rest = substr($bin, -7, 1); 
+		if ($rest == "1") 
+		{
+			echo "Relay 7 on <br>" ;
+		}
+		else
+			{
+				echo "Relay 7 off <br>" ;
+			}
+			
+		$rest = substr($bin, -8, 1);
+		if ($rest == "1") 
+		{
+			echo "Relay 8 on <br>" ;
+	
+		}
+		else
+			{
+				echo "Relay 8 off <br>" ;
+			}
+	}
 ?>
