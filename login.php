@@ -8,6 +8,7 @@
         if (empty($_POST['username']) || empty($_POST['password'])) 
         {
                 $error = "Username or Password is invalid + ". $_POST['username'];
+				echo $error;
         }
         else
         {
@@ -31,6 +32,7 @@
                     else 
                     {
                             $error = "Username or Password is invalid";
+							echo $error;
                     }              
         }
     }

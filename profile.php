@@ -1,12 +1,8 @@
 <?php
     include('config.php');
     include('session.php');
-	$GLOBALS['$r1_on_state'] = 'Yellow';
-	$GLOBALS['$r1_off_state'] = 'Red';
-	$GLOBALS['$r2-on-state'] = 'enable';
-	$GLOBALS['$r2-off-state'] = 'disabled';
-	$GLOBALS['$r3-on-state'] = 'enable';
-	$GLOBALS['$r3-off-state'] = 'disabled';
+	sendCommand(255,255,$debug);
+	echo $r1;
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,10 +19,35 @@
             <br>
             <table style="width">
                 <tr>
-                    <td><input type="submit" name="r1-on" value="on"</td>
-                    <td><input type="submit" name="r1-off" value="off"</td> 
-                    <td>Relay 1</td>
-                </tr>
+				<?php 
+				if ($r1 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r1-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r1-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 1 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r1-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r1-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 1 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r2 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r2-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r2-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 2 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r2-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r2-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 2 State=Off</td>\n";
+					}
+				echo "</tr>";
+				?>
                 <tr>
                     <td><input type="submit" name="r2-on" value="on"></td>
                     <td><input type="submit" name="r2-off" value="off"></td> 
@@ -78,9 +99,11 @@
 <?php
     if(isset($_GET['r1-on'])) {
         sendCommand(1,1,$debug);
+		sendCommand(255,255,$debug);
     }
     if(isset($_GET['r1-off'])) {
         sendCommand(1,0,$debug);
+		sendCommand(255,255,$debug);
     }
     if(isset($_GET['r2-on'])) {
         sendCommand(2,1,$debug);
@@ -133,7 +156,8 @@
 	if(isset($_GET['query'])) {
         sendCommand(255,255,$debug); //FD 02 20 FF FF 5D
     }
-
+	
+	
     function sendCommand($relay,$state,$debug)
 	{
             $socket = fsockopen('10.70.1.15',20000,$errno,$errstr);
@@ -213,7 +237,7 @@
                     default:
                         state($bin);
                     }
-                echo $bin . "<br>";
+                // echo $bin . "<br>";
 				
             }
             return $bin;
@@ -234,21 +258,25 @@
 		$rest = substr($bin, -1); 
 		if ($rest == "1") 
 		{
-			echo "Relay 3 on <br>" ;
+			echo "Relay 1 on <br>" ;
+			$GLOBALS['r1'] = "On";
 		}
 		else
 			{
 				echo "Relay 1 off <br>" ;
+				$GLOBALS['r1']  = "Off";
 			}
 			
 		$rest = substr($bin, -2, 1); 
 		if ($rest == "1") 
 		{
 			echo "Relay 2 on <br>" ;
+			$GLOBALS['r2']  = "On";
 		}
 		else
 			{
 				echo "Relay 2 off <br>" ;
+				$GLOBALS['r2']  = "Off";
 			}
 			
 		$rest = substr($bin, -3, 1);
@@ -313,5 +341,11 @@
 			{
 				echo "Relay 8 off <br>" ;
 			}
+	}
+	function untrue($input)
+	{
+		if ($input == "true")
+			return "false";
+		return "true";
 	}
 ?>
