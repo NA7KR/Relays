@@ -133,12 +133,12 @@
 				?>
               
                 <tr>
-                    <td><input type="submit" name="r9-on" value="on"></td>
-                    <td><input type="submit" name="r9-off" value="off"></td> 
+                    <td><input type="submit" name="r9-on" value="on" class="inputother"></td>
+                    <td><input type="submit" name="r9-off" value="off" class="inputother"></td> 
                     <td>Relay All</td>
                 </tr>
 				<tr>
-                    <td><input type="submit" name="query" value="on"></td> 
+                    <td><input type="submit" name="query" value="on" class="inputother"></td> 
                     <td>Query</td>
                 </tr>
             </table> 			 
@@ -338,7 +338,7 @@
 		$rest = substr($bin, -6, 1);
 		if ($rest == "1") 
 		{
-			$GLOBALS['r5']  = "On";
+			$GLOBALS['r6']  = "On";
 	
 		}
 		else
