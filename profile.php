@@ -2,7 +2,6 @@
     include('config.php');
     include('session.php');
 	sendCommand(255,255,$debug);
-	echo $r1;
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,42 +46,92 @@
 						echo "<td>Relay 2 State=Off</td>\n";
 					}
 				echo "</tr>";
+				echo "<tr>";
+				if ($r3 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r3-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r3-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 3 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r3-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r3-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 3 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r4 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r4-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r4-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 4 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r4-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r4-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 4 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r5 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r5-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r5-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 5 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r5-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r5-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 5 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r6 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r6-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r6-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 6 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r6-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r6-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 6 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r7 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r7-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r7-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 3 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r7-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r7-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 7 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r8 == "On")
+				{
+					echo "<td><input type=\"submit\" name=\"r8-on\" value=\"on\" disabled></td>\n";
+                    echo "<td><input type=\"submit\" name=\"r8-off\" value=\"off\" ></td>\n";
+                    echo "<td>Relay 8 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td><input type=\"submit\" name=\"r8-on\" value=\"on\" ></td>\n";
+						echo "<td><input type=\"submit\" name=\"r8-off\" value=\"off\" disabled></td>\n";
+						echo "<td>Relay 8 State=Off</td>\n";
+					}
+				echo "</tr>";
 				?>
-                <tr>
-                    <td><input type="submit" name="r2-on" value="on"></td>
-                    <td><input type="submit" name="r2-off" value="off"></td> 
-                    <td>Relay 2</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="r3-on" value="on"></td>
-                    <td><input type="submit" name="r3-off" value="off"></td> 
-                    <td>Relay 3</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="r4-on" value="on"></td>
-                    <td><input type="submit" name="r4-off" value="off"></td> 
-                    <td>Relay 4</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="r5-on" value="on"></td>
-                    <td><input type="submit" name="r5-off" value="off"></td> 
-                    <td>Relay 5</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="r6-on" value="on"></td>
-                    <td><input type="submit" name="r6-off" value="off"></td> 
-                    <td>Relay 6</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="r7-on" value="on"></td>
-                    <td><input type="submit" name="r7-off" value="off"></td> 
-                    <td>Relay 7</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="r8-on" value="on"></td>
-                    <td><input type="submit" name="r8-off" value="off"></td> 
-                    <td>Relay 8</td>
-                </tr>
+              
                 <tr>
                     <td><input type="submit" name="r9-on" value="on"></td>
                     <td><input type="submit" name="r9-off" value="off"></td> 
@@ -157,7 +206,6 @@
         sendCommand(255,255,$debug); //FD 02 20 FF FF 5D
     }
 	
-	
     function sendCommand($relay,$state,$debug)
 	{
             $socket = fsockopen('10.70.1.15',20000,$errno,$errstr);
@@ -180,53 +228,37 @@
                 $bin = hexToBin($res); // each char is the state of a relay
                 switch ($bin)
                     {
-                    case  "0000000100000001":
-                        echo "Relay 1 on <br>";
+                    case  "0000000100000001":       
                         break;
                     case "0000000100000000":
-                        echo "Relay 1 off <br>";
                         break;
                     case "0000001000000001":
-                        echo "Relay 2 on <br>";
                         break;
                     case "0000001000000000":
-                        echo "Relay 2 off <br>";
                         break;
                     case "0000001100000001":
-                        echo "Relay 3 on <br>";
                         break;
                     case "0000001100000000":
-                        echo "Relay 3 off <br>";
                         break;
                     case "0000010000000001":
-                        echo "Relay 4 on <br>";
                         break;      
                     case "0000010000000000":
-                        echo "Relay 4 off <br>";
                         break;
                     case "0000010100000001":
-                        echo "Relay 5 on <br>";
                         break;
                     case "0000010100000000":
-                        echo "Relay 5 off <br>";
                         break;
                     case "0000011000000001":
-                        echo "Relay 6 on <br>";
                         break;
                     case "0000011000000000":
-                        echo "Relay 6 off <br>";
                         break;
                     case "0000011100000001":
-                        echo "Relay 7 on <br>";
                         break;
                     case "0000011100000000":
-                        echo "Relay 7 off <br>";
                         break;
                     case "0000100000000001":
-                        echo "Relay 8 on <br>";
                         break;
                     case "0000100000000000":
-                        echo "Relay 8 off <br>";
                         break;
                     case "1111100010001000":
                         echo "Relay All on <br>";
@@ -237,11 +269,8 @@
                     default:
                         state($bin);
                     }
-                // echo $bin . "<br>";
-				
             }
-            return $bin;
-		
+            return $bin;	
 	}
 	
     function hexToBin($hex) 
@@ -258,94 +287,84 @@
 		$rest = substr($bin, -1); 
 		if ($rest == "1") 
 		{
-			echo "Relay 1 on <br>" ;
 			$GLOBALS['r1'] = "On";
 		}
 		else
 			{
-				echo "Relay 1 off <br>" ;
 				$GLOBALS['r1']  = "Off";
 			}
 			
 		$rest = substr($bin, -2, 1); 
 		if ($rest == "1") 
 		{
-			echo "Relay 2 on <br>" ;
 			$GLOBALS['r2']  = "On";
 		}
 		else
 			{
-				echo "Relay 2 off <br>" ;
 				$GLOBALS['r2']  = "Off";
 			}
 			
 		$rest = substr($bin, -3, 1);
 		if ($rest == "1") 
 		{
-			echo "Relay 3 on <br>" ;
+			$GLOBALS['r3']  = "On";
 	
 		}
 		else
 			{
-				echo "Relay 3 off <br>" ;
+				$GLOBALS['r3']  = "Off";
 			}
 			
 		$rest = substr($bin, -4, 1); 
 		if ($rest == "1") 
 		{
-			echo "Relay 4 on <br>" ;
+			$GLOBALS['r4']  = "On";
 		}
 		else
 			{
-				echo "Relay 4 off <br>" ;
+				$GLOBALS['r4']  = "Off";
 			}
 			
 		$rest = substr($bin, -5, 1); 
 		if ($rest == "1") 
 		{
-			echo "Relay 5 on <br>" ;
+			$GLOBALS['r5']  = "On";
 		}
 		else
 			{
-				echo "Relay 5 off <br>" ;
+				$GLOBALS['r5']  = "Off";
 			}
 			
 		$rest = substr($bin, -6, 1);
 		if ($rest == "1") 
 		{
-			echo "Relay 6 on <br>" ;
+			$GLOBALS['r5']  = "On";
 	
 		}
 		else
 			{
-				echo "Relay 6 off <br>" ;
+				$GLOBALS['r6']  = "Off";
 			}
 		
 		$rest = substr($bin, -7, 1); 
 		if ($rest == "1") 
 		{
-			echo "Relay 7 on <br>" ;
+			$GLOBALS['r7']  = "On";
 		}
 		else
 			{
-				echo "Relay 7 off <br>" ;
+				$GLOBALS['r7']  = "Off";
 			}
 			
 		$rest = substr($bin, -8, 1);
 		if ($rest == "1") 
 		{
-			echo "Relay 8 on <br>" ;
+			$GLOBALS['r8']  = "On";
 	
 		}
 		else
 			{
-				echo "Relay 8 off <br>" ;
+				$GLOBALS['r8']  = "Off";
 			}
-	}
-	function untrue($input)
-	{
-		if ($input == "true")
-			return "false";
-		return "true";
 	}
 ?>
