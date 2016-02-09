@@ -1,158 +1,13 @@
 <?php
     include('config.php');
     include('session.php');
-	sendCommand(255,255,$debug);
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Relay</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <form action="profile.php" method="get">
-            <div id="profile">
-                <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
-                <b id="logout"><a href="logout.php">Log Out</a></b>
-            </div>
-            <br>
-            <table style="width">
-                <tr>
-				<?php 
-				if ($r1 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r1-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r1-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 1 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r1-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r1-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 1 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r2 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r2-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r2-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 2 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r2-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r2-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 2 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r3 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r3-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r3-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 3 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r3-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r3-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 3 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r4 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r4-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r4-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 4 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r4-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r4-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 4 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r5 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r5-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r5-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 5 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r5-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r5-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 5 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r6 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r6-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r6-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 6 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r6-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r6-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 6 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r7 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r7-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r7-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 3 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r7-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r7-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 7 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r8 == "On")
-				{
-					echo "<td><input type=\"submit\" name=\"r8-on\" value=\"on\" disabled></td>\n";
-                    echo "<td><input type=\"submit\" name=\"r8-off\" value=\"off\" ></td>\n";
-                    echo "<td>Relay 8 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td><input type=\"submit\" name=\"r8-on\" value=\"on\" ></td>\n";
-						echo "<td><input type=\"submit\" name=\"r8-off\" value=\"off\" disabled></td>\n";
-						echo "<td>Relay 8 State=Off</td>\n";
-					}
-				echo "</tr>";
-				?>
-              
-                <tr>
-                    <td><input type="submit" name="r9-on" value="on" class="inputother"></td>
-                    <td><input type="submit" name="r9-off" value="off" class="inputother"></td> 
-                    <td>Relay All</td>
-                </tr>
-				<tr>
-                    <td><input type="submit" name="query" value="on" class="inputother"></td> 
-                    <td>Query</td>
-                </tr>
-            </table> 			 
-        </form>
-    </body>
-</html>
-<?php
+	
+
     if(isset($_GET['r1-on'])) {
         sendCommand(1,1,$debug);
-		sendCommand(255,255,$debug);
     }
     if(isset($_GET['r1-off'])) {
         sendCommand(1,0,$debug);
-		sendCommand(255,255,$debug);
     }
     if(isset($_GET['r2-on'])) {
         sendCommand(2,1,$debug);
@@ -205,6 +60,7 @@
 	if(isset($_GET['query'])) {
         sendCommand(255,255,$debug); //FD 02 20 FF FF 5D
     }
+	sendCommand(255,255,$debug);
 	
     function sendCommand($relay,$state,$debug)
 	{
@@ -368,3 +224,130 @@
 			}
 	}
 ?>
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Relay</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <form action="profile.php" method="get">
+            <div id="profile">
+                <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
+                <b id="logout"><a href="logout.php">Log Out</a></b>
+            </div>
+            <br>
+            <table >
+                <tr>
+				<?php 
+				if ($r1 == "On")
+				{ 
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-off\" value=\"on\" Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 1 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-on\" value=\"off\" Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 1 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r2 == "On")
+				{
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 2 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 2 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r3 == "On")
+				{
+					
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 3 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 3 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r4 == "On")
+				{
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 4 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 4 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r5 == "On")
+				{
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 5 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 5 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r6 == "On")
+				{
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 6 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 6 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r7 == "On")
+				{
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-off\" value=\"off\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 3 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-on\" value=\"on\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 7 State=Off</td>\n";
+					}
+				echo "</tr>";
+				echo "<tr>";
+				if ($r8 == "On")
+				{
+                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+                    echo "<td>Relay 8 State=On</td>\n";
+				}
+				else 
+					{
+						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+						echo "<td>Relay 8 State=Off</td>\n";
+					}
+				echo "</tr>";
+				?>
+              
+                <tr>
+                    <td><input type="submit" name="r9-on" value="on" class="inputother"></td>
+                    <td><input type="submit" name="r9-off" value="off" class="inputother"></td> 
+                    <td>Relay All</td>
+                </tr>
+				<tr>
+                    <td><input type="submit" name="query" value="on" class="inputother"></td> 
+                    <td>Query</td>
+                </tr>
+            </table> 			 
+        </form>
+    </body>
+</html>

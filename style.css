@@ -52,9 +52,9 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-input[type=submit]:disabled {
+.inputdisabledtrue{
 width:80;
-background-color:#848484;
+background-color:#44C444;
 color:#fff;
 border:2px solid #FFCB00;
 padding:10px;
@@ -63,7 +63,7 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-input[type=submit]:enabled {
+.inputdisabledfalse {
 width:80;
 background-color:#FF0000;
 color:#fff;
@@ -94,7 +94,7 @@ i {
 color:#6495ed
 }
 table {
-     width: 50px;
+/*     width: 50px; */
  }
 
 th {
