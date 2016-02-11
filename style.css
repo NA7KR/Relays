@@ -52,7 +52,18 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-.inputdisabledtrue{
+.inputadmin {
+width:200;
+background-color:#FFCB00;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px
+}
+.inputtrue{
 width:80;
 background-color:#44C444;
 color:#fff;
@@ -63,7 +74,7 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-.inputdisabledfalse {
+.inputfalse {
 width:80;
 background-color:#FF0000;
 color:#fff;
