@@ -1,7 +1,5 @@
 <?php
-    include('config.php');
     include('session.php');
-	
 
     if(isset($_GET['r1-on'])) {
         sendCommand(1,1);
@@ -62,12 +60,16 @@
     }
 	sendCommand(255,255);
 	
-	$query = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8`,`Relay All` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= $login_session");
-	//$query = query("select * from Login where password='$encrypt_password' AND username='$username'");
-	$rows = get_num_rows($query);
-	if ($rows == 1) {	
+	//get access
+	$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8`,`Relay All` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
+	$access_row = fetch_array($sql);
+	//end access save as array $access_row
 	
-			}         
+	//get name
+	$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
+	$name_row = fetch_array($sql);
+	//end get name saved to array  $name_row
+
 	
     function sendCommand($relay,$state)
 	{
@@ -223,6 +225,8 @@
 				$GLOBALS['r8']  = "Off";
 			}
 	}
+	
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -238,111 +242,132 @@
             </div>
             <br>
             <table >
-                <tr>
+                
 				<?php 	
-				if ($r1 == "On")
-				{ 
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-off\" value=\"on\" Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 1 State=On</td>\n";
-				}
-				else 
-					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-on\" value=\"off\" Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 1 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r2 == "On")
+				if ($access_row['Relay 1']) 
 				{
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 2 State=On</td>\n";
+					echo "<tr>";
+						if ($r1 == "On")
+						{ 
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-off\" value=\"on\" Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-on\" value=\"off\" Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 1'] . "</td>\n";		
+					echo "</tr>";	
 				}
-				else 
-					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 2 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r3 == "On")
+				if ($access_row['Relay 2']) 
 				{
-					
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 3 State=On</td>\n";
+					echo "<tr>";
+						if ($r2 == "On")
+						{
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 2'] . "</td>\n";
+					echo "</tr>";
 				}
-				else 
-					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 3 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r4 == "On")
+				if ($access_row['Relay 3']) 
 				{
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 4 State=On</td>\n";
+					echo "<tr>";
+						if ($r3 == "On")
+						{
+							
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 3'] . "</td>\n";
+					echo "</tr>";
 				}
-				else 
+				if ($access_row['Relay 4']) 
 					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 4 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r5 == "On")
+					echo "<tr>";
+						if ($r4 == "On")
+						{
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 4'] . "</td>\n";
+					echo "</tr>";
+				}
+				if ($access_row['Relay 5']) 
 				{
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 5 State=On</td>\n";
+					echo "<tr>";
+						if ($r5 == "On")
+						{
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 5'] . "</td>\n";
+					echo "</tr>";
 				}
-				else 
-					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 5 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r6 == "On")
+				if ($access_row['Relay 6']) 
 				{
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 6 State=On</td>\n";
+					echo "<tr>";
+						if ($r6 == "On")
+						{
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 6'] . "</td>\n";
+					echo "</tr>";
 				}
-				else 
+				if ($access_row['Relay 7']) 
 					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 6 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r7 == "On")
-				{
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-off\" value=\"off\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 7 State=On</td>\n";
+						echo "<tr>";
+						if ($r7 == "On")
+						{
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-off\" value=\"off\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-on\" value=\"on\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 7'] . "</td>\n";
+					echo "</tr>";
 				}
-				else 
+				if ($access_row['Relay 8']) 
 					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-on\" value=\"on\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 7 State=Off</td>\n";
-					}
-				echo "</tr>";
-				echo "<tr>";
-				if ($r8 == "On")
-				{
-                    echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 8 State=On</td>\n";
+					echo "<tr>";
+						if ($r8 == "On")
+						{
+							echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-off\" value=\"on\"  Class=\"inputdisabledtrue\"></td>\n";
+						}
+						else 
+							{
+								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
+							}
+					echo "<td>" . $name_row['Relay 8'] . "</td>\n";
+					echo "</tr>";
 				}
-				else 
+				if ($access_row['Relay All']) 
 					{
-						echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-on\" value=\"off\"  Class=\"inputdisabledfalse\"></td>\n";
-						echo "<td>Relay 8 State=Off</td>\n";
-					}
-				echo "</tr>";
-				?>
-              
-                <tr>
-                    <td><input type="submit" name="r9-on" value="on" class="inputother"></td>
-                    <td><input type="submit" name="r9-off" value="off" class="inputother"></td> 
-                    <td>Relay All</td>
-                </tr>
+					?>
+					<tr>
+						<td><input type="submit" name="r9-on" value="on" class="inputother"></td>
+						<td><input type="submit" name="r9-off" value="off" class="inputother"></td> 
+						<td>Relay All</td>
+					</tr>
+					<?php
+						}
+					?>
 				<tr>
                     <td colspan="2"><input type="submit" name="query" value="on" class="inputother"></td> 
                     <td>Query</td>

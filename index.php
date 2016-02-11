@@ -1,5 +1,4 @@
 <?php
-require_once("connection.php");  	//include your connection to your db
 	require_once("sqli.php");			//our file which holds our sql functions 
     session_start(); // Starting Session
     $error=''; // Variable To Store Error Message

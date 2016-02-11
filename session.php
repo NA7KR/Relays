@@ -1,12 +1,12 @@
 <?php
-    require_once("connection.php");  	//include your connection to your db
+    
 	require_once("sqli.php");			//our file which holds our sql functions
 	
 	session_start();// Starting Session
 	// Storing Session
 	$user_check=$_SESSION['login_user'];
 	// SQL Query To Fetch Complete Information Of User
-	$ses_sql=query("select username from login where username='$user_check'");
+	$ses_sql=query("select username from Login where username='$user_check'");
 	$row = fetch_array($ses_sql);
 	$login_session =$row['username'];
 	if(!isset($login_session))
