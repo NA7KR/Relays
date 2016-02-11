@@ -2,14 +2,7 @@
 
 $dbusername = "root";
 $dbpassword = "Password";
-$dbdatabase = "Play";
+$dbdatabase = "Relay";
 $dbhost = "localhost";
-$debug= false;
 
- $con=  \mysqli_connect($dbhost,$dbusername,$dbpassword,$dbdatabase);
- // Check connection
- if (mysqli_connect_errno())
-   {
-   echo "Failed to connect to MySQL: " . mysqli_connect_error();
-   }
 ?>

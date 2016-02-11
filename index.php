@@ -21,8 +21,9 @@ require_once("connection.php");  	//include your connection to your db
             $username = mysqli_real_escape_string($connection,$username);
             $password = mysqli_real_escape_string($connection,$password);
             // Selecting Database
-          
-            $query = query("select * from login where password='$password' AND username='$username'");
+			$encrypt_password="*" . sha1(sha1($password,true));
+			echo $encrypt_password; 
+            $query = query("select * from Login where password='$encrypt_password' AND username='$username'");
             $rows = get_num_rows($query);
             if ($rows == 1) {
                     $_SESSION['login_user']=$username; // Initializing Session

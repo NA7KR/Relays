@@ -4,65 +4,72 @@
 	
 
     if(isset($_GET['r1-on'])) {
-        sendCommand(1,1,$debug);
+        sendCommand(1,1);
     }
     if(isset($_GET['r1-off'])) {
-        sendCommand(1,0,$debug);
+        sendCommand(1,0);
     }
     if(isset($_GET['r2-on'])) {
-        sendCommand(2,1,$debug);
+        sendCommand(2,1);
     }
     if(isset($_GET['r2-off'])) {
-        sendCommand(2,0,$debug);
+        sendCommand(2,0);
     }
     if(isset($_GET['r3-on'])) {
-        sendCommand(3,1,$debug);
+        sendCommand(3,1);
     }
     if(isset($_GET['r3-off'])) {
-        sendCommand(3,0,$debug);
+        sendCommand(3,0);
     }
     if(isset($_GET['r4-on'])) {
-        sendCommand(4,1,$debug);
+        sendCommand(4,1);
     }
     if(isset($_GET['r4-off'])) {
-        sendCommand(4,0,$debug);
+        sendCommand(4,0);
     }
     if(isset($_GET['r5-on'])) {
-        sendCommand(5,1,$debug);
+        sendCommand(5,1);
     }
     if(isset($_GET['r5-off'])) {
-        sendCommand(5,0,$debug);
+        sendCommand(5,0);
     }
     if(isset($_GET['r6-on'])) {
-        sendCommand(6,1,$debug);
+        sendCommand(6,1);
     }
     if(isset($_GET['r6-off'])) {
-        sendCommand(6,0,$debug);
+        sendCommand(6,0);
     }
    if(isset($_GET['r7-on'])) {
-        sendCommand(7,1,$debug);
+        sendCommand(7,1);
     }
     if(isset($_GET['r7-off'])) {
-        sendCommand(7,0,$debug);
+        sendCommand(7,0);
     }
     if(isset($_GET['r8-on'])) {
-        sendCommand(8,1,$debug);
+        sendCommand(8,1);
     }
     if(isset($_GET['r8-off'])) {
-        sendCommand(8,0,$debug);
+        sendCommand(8,0);
     }
     if(isset($_GET['r9-on'])) {
-        sendCommand(248,136,$debug);
+        sendCommand(248,136);
     }
     if(isset($_GET['r9-off'])) {
-        sendCommand(248,128,$debug);
+        sendCommand(248,128);
     }
 	if(isset($_GET['query'])) {
-        sendCommand(255,255,$debug); //FD 02 20 FF FF 5D
+        sendCommand(255,255); //FD 02 20 FF FF 5D
     }
-	sendCommand(255,255,$debug);
+	sendCommand(255,255);
 	
-    function sendCommand($relay,$state,$debug)
+	$query = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8`,`Relay All` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= $login_session");
+	//$query = query("select * from Login where password='$encrypt_password' AND username='$username'");
+	$rows = get_num_rows($query);
+	if ($rows == 1) {	
+	
+			}         
+	
+    function sendCommand($relay,$state)
 	{
             $socket = fsockopen('10.70.1.15',20000,$errno,$errstr);
             if(!$socket)
@@ -71,11 +78,6 @@
             }
             else
             {
-                if ($debug == true)
-                {
-                        echo $relay . " Relay /n";
-                        echo $state . " State /n";
-                }
                 $cmdString = "\xFD\x02\x20" . chr($relay) . chr($state) . "\x5D";
                 fwrite($socket,$cmdString);
                 $res = fread($socket,20);
@@ -117,10 +119,8 @@
                     case "0000100000000000":
                         break;
                     case "1111100010001000":
-                        echo "Relay All on <br>";
                         break;
                     case "1111100010000000":
-                        echo "Relay All off <br>";
                         break;
                     default:
                         state($bin);
@@ -239,7 +239,7 @@
             <br>
             <table >
                 <tr>
-				<?php 
+				<?php 	
 				if ($r1 == "On")
 				{ 
                     echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-off\" value=\"on\" Class=\"inputdisabledtrue\"></td>\n";
@@ -316,7 +316,7 @@
 				if ($r7 == "On")
 				{
                     echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-off\" value=\"off\"  Class=\"inputdisabledtrue\"></td>\n";
-                    echo "<td>Relay 3 State=On</td>\n";
+                    echo "<td>Relay 7 State=On</td>\n";
 				}
 				else 
 					{
@@ -344,7 +344,7 @@
                     <td>Relay All</td>
                 </tr>
 				<tr>
-                    <td><input type="submit" name="query" value="on" class="inputother"></td> 
+                    <td colspan="2"><input type="submit" name="query" value="on" class="inputother"></td> 
                     <td>Query</td>
                 </tr>
             </table> 			 
