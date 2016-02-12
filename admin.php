@@ -1,8 +1,76 @@
 <?php
+	$showusers_active =false;
+	$shownaccess_active = false;
+	$shownames_active = false;
 	include('session.php');
 	if(isset($_GET['goback'])) {
         header("Location: profile.php"); // Redirecting To main
     }
+	if(isset($_GET['showusers'])) {
+		$showusers_active =true;
+		$msg = showusers();
+    }
+    if(isset($_GET['shownaccess'])) {
+		$shownaccess_active = true;
+		$msg = shownaccess();
+    }
+    if(isset($_GET['shownames'])) {
+		$shownames_active = true;
+		$msg = shownames();
+    }
+
+	function shownames()
+	{
+		$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
+		$name_row = fetch_array($sql);
+		
+		$msg = "<table>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 1</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay1\" value=\" " . $name_row['Relay 1'] . "\" ></td>\n";	
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 2</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay2\" value=\" " . $name_row['Relay 2'] . "\" ></td>\n";		
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 3</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay3\" value=\" " . $name_row['Relay 3'] . "\" ></td>\n";	
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 4</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay4\" value=\" " . $name_row['Relay 4'] . "\" ></td>\n";		
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 5</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay5\" value=\" " . $name_row['Relay 5'] . "\" ></td>\n";		
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 6</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay6\" value=\" " . $name_row['Relay 6'] . "\" ></td>\n";	
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 7</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay7\" value=\" " . $name_row['Relay 7'] . "\" ></td>\n";	
+		$msg  .=  "	</tr>";
+		$msg  .=  "	<tr>";
+		$msg  .=  "		<td>Realy 8</td>";
+		$msg  .=  "<td><input type=\"text\" name=\"relay8\" value=\" " . $name_row['Relay 8'] . "\" ></td>\n";	
+		$msg  .=  "	</tr>";
+		$msg  .=  "	</table>";
+		return  $msg;
+	}
+	
+	function shownaccess()
+	{
+		return  "shownaccess";
+	}
+	
+	function showusers()
+	{
+		return  "showusers";
+	}
+	
 	//get access
 	$sql = query("SELECT `Admin` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
 	$access_row = fetch_array($sql);
@@ -18,7 +86,7 @@
 ?>
 <html>
     <head>
-    <title>Relay</title>
+    <title>Relay Admin</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -28,18 +96,39 @@
                 <b id="logout"><a href="logout.php">Log Out</a></b>
             </div>
             <br>
-			<table>
-				<tr>
-					<td><input type="submit" name="showusers" value="Show Users" class="inputadmin"></td>
-				</tr>
-				<tr>
-					<td ><input type="submit" name="shownames" value="Show Relay Names" class="inputadmin"></td> 
-				</tr>
-				<tr>
-					<td ><input type="submit" name="shownaccess" value="Show access" class="inputadmin"></td>
-				</tr>
-				<tr>
-					<td ><input type="submit" name="goback" value="Go Back" class="inputadmin"></td> 
+			
+			<?php 
+				if ($showusers_active || $shownaccess_active ||$shownames_active )
+				{
+						echo $msg;
+						echo "<table>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"save\" value=\"Save\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+					}
+					else
+					{
+					?>
+							<table>
+							<tr>
+								<td><input type="submit" name="showusers" value="Show Users" class="inputadmin"></td>
+							</tr>
+							<tr>
+								<td ><input type="submit" name="shownames" value="Show Relay Names" class="inputadmin"></td> 
+							</tr>
+							<tr>
+								<td ><input type="submit" name="shownaccess" value="Show access" class="inputadmin"></td>
+							</tr>
+						
+					<?php 
+					
+				}
+			 ?>
+			 	<tr>
+					<td ><input type="submit" name="goback" value="Go Back Main" class="inputadmin"></td> 
 				</tr>
 			</table>
 		</form>

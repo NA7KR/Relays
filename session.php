@@ -1,7 +1,9 @@
 <?php
-	require_once("sqli.php");			//our file which holds our sql functions
+	require_once("sqli.php");			
 	session_start();// Starting Session
-	// Storing Session
+	/******************
+	Storing Session 
+	******************/
 	$user_check=$_SESSION['login_user'];
 	// SQL Query To Fetch Complete Information Of User
 	$sql=query("select username from Login where username='$user_check'");
@@ -11,4 +13,7 @@
 	{
 		header('Location: index.php'); // Redirecting To Home Page
 	}
+	/******************
+	Check if login or not 
+	******************/
 ?>
