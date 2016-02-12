@@ -1,64 +1,64 @@
 <?php
     include('session.php');
 
-    if(isset($_GET['r1-on'])) {
+    if(isset($_POST['r1-on'])) {
         sendCommand(1,1);
     }
-    if(isset($_GET['r1-off'])) {
+    if(isset($_POST['r1-off'])) {
         sendCommand(1,0);
     }
-    if(isset($_GET['r2-on'])) {
+    if(isset($_POST['r2-on'])) {
         sendCommand(2,1);
     }
-    if(isset($_GET['r2-off'])) {
+    if(isset($_POST['r2-off'])) {
         sendCommand(2,0);
     }
-    if(isset($_GET['r3-on'])) {
+    if(isset($_POST['r3-on'])) {
         sendCommand(3,1);
     }
-    if(isset($_GET['r3-off'])) {
+    if(isset($_POST['r3-off'])) {
         sendCommand(3,0);
     }
-    if(isset($_GET['r4-on'])) {
+    if(isset($_POST['r4-on'])) {
         sendCommand(4,1);
     }
-    if(isset($_GET['r4-off'])) {
+    if(isset($_POST['r4-off'])) {
         sendCommand(4,0);
     }
-    if(isset($_GET['r5-on'])) {
+    if(isset($_POST['r5-on'])) {
         sendCommand(5,1);
     }
-    if(isset($_GET['r5-off'])) {
+    if(isset($_POST['r5-off'])) {
         sendCommand(5,0);
     }
-    if(isset($_GET['r6-on'])) {
+    if(isset($_POST['r6-on'])) {
         sendCommand(6,1);
     }
-    if(isset($_GET['r6-off'])) {
+    if(isset($_POST['r6-off'])) {
         sendCommand(6,0);
     }
-   if(isset($_GET['r7-on'])) {
+   if(isset($_POST['r7-on'])) {
         sendCommand(7,1);
     }
-    if(isset($_GET['r7-off'])) {
+    if(isset($_POST['r7-off'])) {
         sendCommand(7,0);
     }
-    if(isset($_GET['r8-on'])) {
+    if(isset($_POST['r8-on'])) {
         sendCommand(8,1);
     }
-    if(isset($_GET['r8-off'])) {
+    if(isset($_POST['r8-off'])) {
         sendCommand(8,0);
     }
-    if(isset($_GET['r9-on'])) {
+    if(isset($_POST['r9-on'])) {
         sendCommand(248,136);
     }
-    if(isset($_GET['r9-off'])) {
+    if(isset($_POST['r9-off'])) {
         sendCommand(248,128);
     }
-	if(isset($_GET['query'])) {
+	if(isset($_POST['query'])) {
         sendCommand(255,255); //FD 02 20 FF FF 5D
     }
-	if(isset($_GET['admin'])) {
+	if(isset($_POST['admin'])) {
         header("Location: admin.php"); // Redirecting To admin
     }
 	sendCommand(255,255);
@@ -238,7 +238,7 @@
     <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <form action="profile.php" method="get">
+        <form action="profile.php" method="post">
             <div id="profile">
                 <b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b>
                 <b id="logout"><a href="logout.php">Log Out</a></b>

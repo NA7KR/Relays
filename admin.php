@@ -3,18 +3,18 @@
 	$shownaccess_active = false;
 	$shownames_active = false;
 	include('session.php');
-	if(isset($_GET['goback'])) {
+	if(isset($_POST['goback'])) {
         header("Location: profile.php"); // Redirecting To main
     }
-	if(isset($_GET['showusers'])) {
+	if(isset($_POST['showusers'])) {
 		$showusers_active =true;
 		$msg = showusers();
     }
-    if(isset($_GET['shownaccess'])) {
+    if(isset($_POST['shownaccess'])) {
 		$shownaccess_active = true;
 		$msg = shownaccess();
     }
-    if(isset($_GET['shownames'])) {
+    if(isset($_POST['shownames'])) {
 		$shownames_active = true;
 		$msg = shownames();
     }
@@ -90,7 +90,7 @@
     <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <form action="admin.php" method="get">
+        <form action="admin.php" method="post">
             <div id="profile">
                 <b id="welcome">Welcome Admin: <i><?php echo  $login_session; ?></i></b>
                 <b id="logout"><a href="logout.php">Log Out</a></b>
