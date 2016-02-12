@@ -18,7 +18,17 @@
 		$shownames_active = true;
 		$msg = shownames();
     }
-
+	if(isset($_POST['save'])) {
+		$shownames_active = true;
+		$msg = save();
+    }
+	
+	function save()
+	{
+		$msg  =  "Saved";
+		return  $msg;
+	}
+	
 	function shownames()
 	{
 		$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
