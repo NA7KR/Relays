@@ -25,7 +25,8 @@
 	
 	function save()
 	{
-		$msg  =  "Saved";
+		$msg =  query("UPDATE `Names` SET `Relay 1`=\" " . $_POST["relay1"] . " \" WHERE `id`=0");
+		$msg  .=  "Saved";
 		return  $msg;
 	}
 	
