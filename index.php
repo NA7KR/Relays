@@ -12,18 +12,11 @@
         {
             // Define $username and $password
             $username=$_POST['username'];
-            $password=$_POST['password'];
-            
-            // To protect MySQL injection for Security purpose
-            $username = stripslashes($username);
-            $password = stripslashes($password);
-            $username = mysqli_real_escape_string($connection,$username);
-            $password = mysqli_real_escape_string($connection,$password);
-            // Selecting Database
+            $password=$_POST['password'];      
+			
 			$encrypt_password="*" . sha1(sha1($password,true));
-			echo $encrypt_password; 
-            $query = query("select * from Login where password='$encrypt_password' AND username='$username'");
-            $rows = get_num_rows($query);
+			$rows = userpassword($username,$encrypt_password) ;
+			
             if ($rows == 1) {
                     $_SESSION['login_user']=$username; // Initializing Session
                     header("location: profile.php"); // Redirecting To Other Page

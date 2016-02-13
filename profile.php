@@ -64,16 +64,13 @@
 	sendCommand(255,255);
 	
 	//get access
-	$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8`,`Relay All`,`Admin` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
-	$access_row = fetch_array($sql);
+	 $access_row = querysql("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8`,`Relay All`,`Admin` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
 	//end access save as array $access_row
 	
 	//get name
-	$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
-	$name_row = fetch_array($sql);
+	$name_row = querysql("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
 	//end get name saved to array  $name_row
 
-	
     function sendCommand($relay,$state)
 	{
             $socket = fsockopen('10.70.1.15',20000,$errno,$errstr);

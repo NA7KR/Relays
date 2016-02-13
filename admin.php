@@ -25,7 +25,8 @@
 	
 	function save()
 	{
-		$msg = updatenames(	$_POST["relay1"],
+		$msg  =  "Start";
+		$msg .= updatenames(	$_POST["relay1"],
 							$_POST["relay2"],
 							$_POST["relay3"],
 							$_POST["relay4"],
@@ -40,8 +41,7 @@
 	
 	function shownames()
 	{
-		$sql = query("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
-		$name_row = fetch_array($sql);
+		$name_row = querysql("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
 		
 		$msg = "<table>";
 		$msg  .=  "	<tr>";
@@ -91,8 +91,7 @@
 	}
 	
 	//get access
-	$sql = query("SELECT `Admin` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
-	$access_row = fetch_array($sql);
+	$access_row = querysql("SELECT `Admin` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
 	//end access save as array $access_row
 	if ($access_row['Admin']) 
 	{

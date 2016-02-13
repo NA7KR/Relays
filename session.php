@@ -5,9 +5,7 @@
 	Storing Session 
 	******************/
 	$user_check=$_SESSION['login_user'];
-	// SQL Query To Fetch Complete Information Of User
-	$sql=query("select username from Login where username='$user_check'");
-	$row = fetch_array($sql);
+	$row = usercheck($user_check);
 	$login_session =$row['username'];
 	if(!isset($login_session))
 	{
