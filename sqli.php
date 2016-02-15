@@ -5,29 +5,37 @@
 	/******************
 	Connection PDO
 	******************/
+	function connect()
+	{
+		global $dbhost;
+		global $dbdatabase;
+		global $dbusername;
+		global $dbpassword;
 	try
 		{
 			$conn = new PDO("mysql:host=$dbhost; dbname=$dbdatabase", $dbusername, $dbpassword);
 			$conn->exec("SET CHARACTER SET utf8");      // Sets encoding UTF-8
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			return $conn;
 		}
 	catch(PDOException $e) 
 		{
 			return $e->getMessage();
 		}
+	}
 	
 	/******************
 	Make SQL Call 
 	******************/
 	function querysql($sql) 
 	{
-		echo $sql;
-		global $conn;
+		$conn = connect();
 		try
 		{
 			$statement = $conn->prepare($sql);
 			$statement->execute();	
 			$result=$statement->fetch(PDO::FETCH_ASSOC);
+			$conn = null;        // Disconnect
 			return $result;	
 		}
 		catch(PDOException $e) 
@@ -42,7 +50,7 @@
 	******************/
 	function updatenames($relay1,$relay2,$relay3,$relay4,$relay5,$relay6,$relay7,$relay8)
 	{
-		global $conn;
+		$conn = connect();
 		try
 		 {
 				$sql = "UPDATE `Names`  
@@ -56,7 +64,7 @@
 					`Relay 7` = :relay7, 
 					`Relay 8` = :relay8  
 				WHERE `id`=0";
-
+		
 				$statement = $conn->prepare($sql);
 				$statement->bindValue(":relay1", $relay1);
 				$statement->bindValue(":relay2", $relay2);
@@ -67,14 +75,15 @@
 				$statement->bindValue(":relay7", $relay7);
 				$statement->bindValue(":relay8", $relay8); 
 				$count = $statement->execute();	
-				$conn = null;        // Disconnect
+				$conn = null;        // Disconnect	
 			}
 			catch(PDOException $e) 
 			{
 				return $e->getMessage();
 			}
 			// If the query is succesfully performed ($count not false)
-			if($count != false) return 'Affected rows : ' . $count;       // Shows the number of affected rows
+			if($count != false) return $count;       // Shows the number of affected rows
+			
 	}
 	
 	/******************
@@ -82,7 +91,7 @@
 	******************/
 	function userpassword($user,$password)
 	{
-		global $conn;
+		$conn = connect();
 		try
 		{
 			$sql = "SELECT * FROM Login WHERE `username` = :user AND `password` = :password"; 
@@ -91,6 +100,7 @@
 			$statement->bindParam(":password", $password);
 			$statement->execute();	
 			$count=$statement->rowCount();
+			$conn = null;        // Disconnect
 			return $count;	
 		}
 		catch(PDOException $e) 
@@ -104,7 +114,7 @@
 	******************/
 	function usercheck($user)
 	{
-		global $conn;
+		$conn = connect();
 		try
 		{
 			$sql = "select username from Login where `username` = :user"; 
@@ -112,6 +122,7 @@
 			$statement->bindParam(":user", $user);
 			$statement->execute();	
 			$result=$statement->fetch(PDO::FETCH_ASSOC);
+			$conn = null;        // Disconnect
 			return $result;	
 		}
 		catch(PDOException $e) 
@@ -119,6 +130,4 @@
 				return $e->getMessage();
 		}
 	}
-
-	
 ?>
