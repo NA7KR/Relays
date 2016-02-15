@@ -24,6 +24,9 @@
 		$saved = savepostnames();
     }
 	
+	/******************
+	Save Names
+	******************/
 	function savepostnames()
 	{
 		$msg = updatenames(	$_POST["relay1"],
@@ -38,6 +41,9 @@
 		return  $msg;
 	}
 	
+	/******************
+	Show Names
+	******************/
 	function shownames()
 	{
 		$name_row = querysql("SELECT `Relay 1`,`Relay 2`,`Relay 3`,`Relay 4`,`Relay 5`,`Relay 6`,`Relay 7`,`Relay 8` FROM `Names`");
@@ -79,17 +85,41 @@
 		return  $msg;
 	}
 	
+	/******************
+	Show Access
+	******************/
 	function shownaccess()
 	{
 		return  "shownaccess";
+		$access_row = querysql("SELECT `Relay 1`, `Relay 2`, `Relay 3`, `Relay 4`, `Relay 5`, `Relay 6`, `Relay 7`, `Relay 8`, `Relay All`, `Admin` FROM `Access` ");
+		?>
+		<table>
+		<?php
+		foreach($sth->fetch(PDO::FETCH_ASSOC) as $access_row) : ?>
+		<tr>
+			<td><?php echo $access_row['Relay 1']; ?></td>
+			<td><?php echo $access_row['Relay 2']; ?></td>
+			<td><?php echo $access_row['Relay 3']; ?></td>
+			<td><?php echo $access_row['Relay 4']; ?></td>
+			<td><?php echo $access_row['Relay 5']; ?></td>
+		</tr>
+		<?php endforeach;?>
+		</table>
+		<?php
 	}
 	
+	/******************
+	Show Users
+	******************/
 	function showusers()
 	{
 		return  "showusers";
+		//SELECT `username` FROM `Login` 
 	}
 	
-	//get access
+	/******************
+	Check if Admin
+	******************/
 	$access_row = querysql("SELECT `Admin` FROM `Access`, `Login` WHERE `id` = `login_id` and `username`= \"$login_session\"");
 	//end access save as array $access_row
 	if ($access_row['Admin']) 
