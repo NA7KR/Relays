@@ -361,8 +361,8 @@
 					{
 					?>
 					<tr>
-						<td><input type="submit" name="r9-on" value="on" class="inputother"></td>
-						<td><input type="submit" name="r9-off" value="off" class="inputother"></td> 
+						<td><input type="submit" name="r9-on" value="on" "></td>
+						<td><input type="submit" name="r9-off" value="off" "></td> 
 						<td>Relay All</td>
 					</tr>
 					<?php
@@ -371,14 +371,14 @@
 					{
 					?>
 					<tr>
-						<td colspan="2"><input type="submit" name="admin" value="on" class="inputother"></td> 
+						<td colspan="2"><input type="submit" name="admin" value="on" "></td> 
 						<td>Admin</td>
 					</tr>
 					<?php
 						}
 					?>
 				<tr>
-                    <td colspan="2"><input type="submit" name="query" value="on" class="inputother"></td> 
+                    <td colspan="2"><input type="submit" name="query" value="on" "></td> 
                     <td>Query</td>
                 </tr>
 				

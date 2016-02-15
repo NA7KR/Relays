@@ -3,6 +3,7 @@
 	$shownaccess_active = false;
 	$shownames_active = false;
 	$saved = 0;
+	$msg = "";
 	include('session.php');
 	if(isset($_POST['goback'])) {
         header("Location: profile.php"); // Redirecting To main
@@ -21,6 +22,7 @@
     }
 	if(isset($_POST['save'])) {
 		$shownames_active = true;
+		$msg = shownames();
 		$saved = savepostnames();
     }
 	
@@ -85,37 +87,8 @@
 		return  $msg;
 	}
 	
-	/******************
-	Show Access
-	******************/
-	function shownaccess()
-	{
-		return  "shownaccess";
-		$access_row = querysql("SELECT `Relay 1`, `Relay 2`, `Relay 3`, `Relay 4`, `Relay 5`, `Relay 6`, `Relay 7`, `Relay 8`, `Relay All`, `Admin` FROM `Access` ");
-		?>
-		<table>
-		<?php
-		foreach($sth->fetch(PDO::FETCH_ASSOC) as $access_row) : ?>
-		<tr>
-			<td><?php echo $access_row['Relay 1']; ?></td>
-			<td><?php echo $access_row['Relay 2']; ?></td>
-			<td><?php echo $access_row['Relay 3']; ?></td>
-			<td><?php echo $access_row['Relay 4']; ?></td>
-			<td><?php echo $access_row['Relay 5']; ?></td>
-		</tr>
-		<?php endforeach;?>
-		</table>
-		<?php
-	}
 	
-	/******************
-	Show Users
-	******************/
-	function showusers()
-	{
-		return  "showusers";
-		//SELECT `username` FROM `Login` 
-	}
+
 	
 	/******************
 	Check if Admin
@@ -145,15 +118,37 @@
             <br>
 			
 			<?php 
-				if ($showusers_active || $shownaccess_active ||$shownames_active )
+				
+				if ($shownames_active )
 				{
-						echo "<table>";
 						if ($saved == 0)
 						{
+							echo $msg;
+							echo "<table>";
 							echo "<tr>";
 							echo "  <td><input type=\"submit\" name=\"save\" value=\"Save\" class=\"inputadmin\"></td>";
 							echo "</tr>";
 						}
+						else
+						{
+								echo "<table>";
+						}
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+				}
+					elseif ($showusers_active  )
+					{
+						echo $msg;
+						echo "<table>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+					}
+					elseif( $shownaccess_active  )
+					{
+						echo $msg;
+						echo "<table>";
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
 						echo "</tr>";

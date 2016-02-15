@@ -32,6 +32,8 @@ border:2px solid #ccc;
 padding:10px 40px 25px;
 margin-top:70px
 }
+
+
 input[type=text],input[type=password] {
 width:99.5%;
 padding:10px;
@@ -41,7 +43,18 @@ padding-left:5px;
 font-size:16px;
 font-family:raleway
 }
-.inputother {
+
+input[type=text].relay  {
+width:80px;
+padding:10px;
+margin-top:8px;
+border:1px solid #ccc;
+padding-left:5px;
+font-size:16px;
+font-family:raleway
+}
+
+input[type=submit] {
 width:80;
 background-color:#FFCB00;
 color:#fff;
@@ -52,7 +65,7 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-.inputadmin {
+input[type=submit].inputadmin {
 width:200;
 background-color:#FFCB00;
 color:#fff;
@@ -63,7 +76,7 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-.inputtrue{
+input[type=submit].inputtrue{
 width:80;
 background-color:#44C444;
 color:#fff;
@@ -74,7 +87,7 @@ cursor:pointer;
 border-radius:5px;
 margin-bottom:15px
 }
-.inputfalse {
+input[type=submit].inputfalse {
 width:80;
 background-color:#FF0000;
 color:#fff;
