@@ -160,16 +160,16 @@
 			foreach($rows as $access_row) : 
 				$msg .=  "<tr>";
 				$msg .= "<td><input type=\"text\" name=\"username\" value=\"" . $access_row['username'] . "\"   ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay1\" value=\"" . $access_row['Relay 1'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay2\" value=\"" . $access_row['Relay 2'] . "\"   class=\"relay\"  ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay3\" value=\"" . $access_row['Relay 3'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay4\" value=\"" . $access_row['Relay 4'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay5\" value=\"" . $access_row['Relay 5'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay6\" value=\"" . $access_row['Relay 6'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay7\" value=\"" . $access_row['Relay 7'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay8\" value=\"" . $access_row['Relay 8'] . "\"   class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay9\" value=\"" . $access_row['Relay All'] . "\" class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"text\" name=\"relay10\" value=\"" . $access_row['Admin'] . "\" 	 class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay1\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay2\" " .  checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay3\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay4\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay5\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay6\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay7\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay8\" "  . checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay9\" "  . checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
+				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay10\" " . checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
 				$msg  .=  "	</tr>";
 			endforeach;
 			$msg  .=  "	</table>";
@@ -180,6 +180,17 @@
 		{
 				return $e->getMessage();
 		}
+	}
+	
+	/******************
+	Cehecked for checkbox
+	******************/
+	function checked($row)
+	{
+		if ($row != false)
+		{
+			return "CHECKED";
+		}		
 	}
 	
 	/******************

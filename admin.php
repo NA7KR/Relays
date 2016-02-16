@@ -139,16 +139,42 @@
 				}
 					elseif ($showusers_active  )
 					{
-						echo $msg;
-						echo "<table>";
+						if ($saved == 0)
+						{
+							echo $msg;
+							echo "<table>";
+							echo "<tr>";
+							echo "  <td><input type=\"submit\" name=\"changepassword\" value=\"Change Password\" class=\"inputadmin\"></td>";
+							echo "</tr>";
+						}
+						else
+						{
+								echo "<table>";
+						}
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"adduser\" value=\"Add User\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"deluser\" value=\"Delete User\" class=\"inputadmin\"></td>";
+						echo "</tr>";
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
 						echo "</tr>";
 					}
 					elseif( $shownaccess_active  )
 					{
-						echo $msg;
-						echo "<table>";
+						if ($saved == 0)
+						{
+							echo $msg;
+							echo "<table>";
+							echo "<tr>";
+							echo "  <td><input type=\"submit\" name=\"saveaccess\" value=\"Save Access\" class=\"inputadmin\"></td>";
+							echo "</tr>";
+						}
+						else
+						{
+								echo "<table>";
+						}
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
 						echo "</tr>";
