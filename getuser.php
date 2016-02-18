@@ -1,6 +1,5 @@
 <?php
-	
+	require_once("sqli.php");	
 	$q = intval($_GET['q']);
-	echo $q;
-
+	echo shownaccess($q);
  ?>

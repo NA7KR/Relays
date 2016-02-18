@@ -1,8 +1,7 @@
 <?php
-	function access_row($rows)
+	function access_row_f($access_row)
 	{
-		$msg  = showusers();	
-		$msg .=  "<table>";
+		$msg =  "<table>";
 		$msg .=  "<tr>";
 		$msg .= "<td>User Name</td>";
 		$msg .= "<td>Relay 1</td>";
@@ -17,21 +16,21 @@
 		$msg .= "<td>Admin</td>";
 		$msg  .=  "	</tr>";
 				
-		foreach($rows as $access_row) : 
-			$msg .=  "<tr>";
-			$msg .= "<td><input type=\"text\" name=\"username\" value=\"" . $access_row['username'] . "\"   ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay1\" " .  checked($access_row['Relay 1']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay2\" " .  checked($access_row['Relay 2']) . " class=\"relay\"  ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay3\" " .  checked($access_row['Relay 3']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay4\" " .  checked($access_row['Relay 4']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay5\" " .  checked($access_row['Relay 5']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay6\" " .  checked($access_row['Relay 6']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay7\" " .  checked($access_row['Relay 7']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relay8\" "  . checked($access_row['Relay 8']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"relayall\" "  . checked($access_row['Relay All']) . " class=\"relay\" ></td>\n";
-			$msg .= "<td><input type=\"CHECKBOX\" name=\"admin\" " . checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
-			$msg  .=  "	</tr>";
-		endforeach;
+		
+		$msg .=  "<tr>";
+		$msg .= "<td><input type=\"text\" name=\"username\" value=\"" . $access_row['username'] . "\"   ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay1\" " .  checked($access_row['Relay 1']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay2\" " .  checked($access_row['Relay 2']) . " class=\"relay\"  ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay3\" " .  checked($access_row['Relay 3']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay4\" " .  checked($access_row['Relay 4']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay5\" " .  checked($access_row['Relay 5']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay6\" " .  checked($access_row['Relay 6']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay7\" " .  checked($access_row['Relay 7']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay8\" "  . checked($access_row['Relay 8']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"relayall\" "  . checked($access_row['Relay All']) . " class=\"relay\" ></td>\n";
+		$msg .= "<td><input type=\"CHECKBOX\" name=\"admin\" " . checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
+		$msg  .=  "	</tr>";
+		
 		$msg  .=  "	</table>";
 		return $msg;
 	}

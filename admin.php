@@ -35,7 +35,8 @@
 	
 	 if(isset($_POST['shownaccess'])) {
 		$shownaccess_active = true;
-		$msg = shownaccess();
+		
+		$msg = showusers();
     }
 	
 	/******************
