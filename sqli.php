@@ -117,7 +117,7 @@
 		$conn = connect();
 		try
 		{
-			$sql = "select username from Login where `username` = :user"; 
+			$sql = "select `username`, `id` from Login where `username` = :user"; 
 			$statement = $conn->prepare($sql);
 			$statement->bindParam(":user", $user);
 			$statement->execute();	
@@ -137,44 +137,16 @@
 	function shownaccess()
 	{
 		$conn = connect();
+		include("access.php");
 		try
 		{
 			$sql = "SELECT `Relay 1`, `Relay 2`, `Relay 3`, `Relay 4`, `Relay 5`, `Relay 6`, `Relay 7`, `Relay 8`, `Relay All`, `Admin`,`username` FROM `Access`, `Login` WHERE `id` = `login_id` ";
 			$statement = $conn->prepare($sql);
 			$statement->execute();	
-			$msg  =  "<table>";
-			$msg .=  "<tr>";
-				$msg .= "<td>User Name</td>";
-				$msg .= "<td>Relay 1</td>";
-				$msg .= "<td>Relay 2</td>";
-				$msg .= "<td>Relay 3</td>";
-				$msg .= "<td>Relay 4</td>";
-				$msg .= "<td>Relay 5</td>";
-				$msg .= "<td>Relay 6</td>";
-				$msg .= "<td>Relay 7</td>";
-				$msg .= "<td>Relay 8</td>";
-				$msg .= "<td>Relay All</td>";
-				$msg .= "<td>Admin</td>";
-				$msg  .=  "	</tr>";
+			
 			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-			foreach($rows as $access_row) : 
-				$msg .=  "<tr>";
-				$msg .= "<td><input type=\"text\" name=\"username\" value=\"" . $access_row['username'] . "\"   ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay1\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay2\" " .  checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay3\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay4\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay5\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay6\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay7\" " .  checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay8\" "  . checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay9\" "  . checked($access_row['Admin']) . " class=\"relay\" ></td>\n";
-				$msg .= "<td><input type=\"CHECKBOX\" name=\"relay10\" " . checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
-				$msg  .=  "	</tr>";
-			endforeach;
-			$msg  .=  "	</table>";
 			$conn = null;        // Disconnect
-			return $msg;	
+			return access_row($rows);	
 		}
 		catch(PDOException $e) 
 		{
@@ -199,25 +171,63 @@
 	function showusers()
 	{	
 		$conn = connect();
+		include("user.php");
 		try
 		{
-			$sql = "SELECT `username` FROM `Login`";
+		$sql = "SELECT `username`, `id` FROM `Login`";
 			$statement = $conn->prepare($sql);
 			$statement->execute();	
-			$msg  =  "<table>";
 			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-			foreach($rows as $access_row) : 
-				$msg .=  "<tr>";
-				$msg .= "<td>" . $access_row['username'] ."</td>";
-				$msg  .=  "	</tr>";
-			endforeach;
-			$msg  .=  "	</table>";
-			$conn = null;        // Disconnect
-			return $msg;	
+			return showuser_rows($rows);
+			$conn = null;  			// Disconnect
 		}
 		catch(PDOException $e) 
 		{
 				return $e->getMessage();
 		}
+	}
+	
+	/******************
+	Update Access 
+	******************/
+	function updateaccess($username,$relay1,$relay2,$relay3,$relay4,$relay5,$relay6,$relay7,$relay8,$relayall,$admin)
+	{
+			$conn = connect();
+		try
+		 {
+				$sql = "UPDATE `Access`  
+				SET  
+					`Relay 1` = :relay1, 
+					`Relay 2` = :relay2, 
+					`Relay 3` = :relay3, 
+					`Relay 4` = :relay4, 
+					`Relay 5` = :relay5, 
+					`Relay 6` = :relay6, 
+					`Relay 7` = :relay7, 
+					`Relay 8` = :relay8, 
+					`Relay All` =:relayall,
+					`Admin`		=:admin
+				WHERE  Select `id` WHERE `username`=$username";
+		
+				$statement = $conn->prepare($sql);
+				$statement->bindValue(":relay1", $relay1);
+				$statement->bindValue(":relay2", $relay2);
+				$statement->bindValue(":relay3", $relay3);
+				$statement->bindValue(":relay4", $relay4);
+				$statement->bindValue(":relay5", $relay5);
+				$statement->bindValue(":relay6", $relay6);
+				$statement->bindValue(":relay7", $relay7);
+				$statement->bindValue(":relay8", $relay8); 
+				$statement->bindValue(":Relay All", $relayall);
+				$statement->bindValue(":Admin", $admin); 
+				$count = $statement->execute();	
+				$conn = null;        // Disconnect	
+			}
+			catch(PDOException $e) 
+			{
+				return $e->getMessage();
+			}
+			// If the query is succesfully performed ($count not false)
+			if($count != false) return $count;       // Shows the number of affected rows
 	}
 ?>
