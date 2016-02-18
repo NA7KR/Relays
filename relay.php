@@ -2,7 +2,7 @@
 /******************
 	Save Names
 	******************/
-	function savepostrealynames()
+	function savepostrelaynames()
 	{
 		$msg = updatenames(	$_POST["relay1"],
 							$_POST["relay2"],

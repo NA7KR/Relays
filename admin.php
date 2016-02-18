@@ -20,8 +20,8 @@
     }
 	if(isset($_POST['save'])) {
 		$shownames_active = true;
-		$msg = shownames();
 		include("relay.php");
+		$msg = showrelaynames();
 		$saved = savepostrelaynames();
     }
 	if(isset($_POST['saveaccess'])) {
