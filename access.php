@@ -72,4 +72,19 @@
 			return "0";
 	}
 	
+	/********************
+	Show Usrs with Access
+	********************/
+	function showuser_access_rows($rows)
+	{
+		$msg = "<select name=\"users\" onchange=\"showUserAccess(this.value)\">";
+		$msg .= "<option value=\"\">Select a person:</option>";
+		foreach($rows as $access_row) : 
+			$msg .=  "<option value=\"" . $access_row['id'] . "\">" . $access_row['username'] . "</option>";
+		endforeach;
+		$msg  .=  "	</select>";
+		$msg .="<div id=\"txtHint\"><b>Person info will be listed here...</b></div>";
+		return $msg;
+	}
+	
 ?>

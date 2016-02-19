@@ -140,7 +140,6 @@
 		include("access.php");
 		try
 		{
-			//$id
 			$sql = "SELECT `Relay 1`, `Relay 2`, `Relay 3`, `Relay 4`, `Relay 5`, `Relay 6`, `Relay 7`, `Relay 8`, `Relay All`, `Admin`,`username` FROM `Access`, `Login` WHERE `id` =`login_id` and `login_id` = $id ";
 			$statement = $conn->prepare($sql);
 			$statement->execute();	
@@ -148,6 +147,29 @@
 			$row = $statement->fetch(PDO::FETCH_ASSOC);
 			$conn = null;        // Disconnect
 			return access_row_f($row);	
+		}
+		catch(PDOException $e) 
+		{
+				return $e->getMessage();
+		}
+	}
+	
+	/******************
+	Show users info
+	******************/
+	Function showuserinfo($id)
+	{
+			$conn = connect();
+		include("user.php");
+		try
+		{
+			$sql = "SELECT `username` FROM `Login` WHERE `id`  = $id ";
+			$statement = $conn->prepare($sql);
+			$statement->execute();	
+			
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
+			$conn = null;        // Disconnect
+			return user_row_f($row);	
 		}
 		catch(PDOException $e) 
 		{
@@ -167,9 +189,31 @@
 	}
 	
 	/******************
+	Show Users Access
+	******************/
+	function showusers_access()
+	{	
+		$conn = connect();
+		include("access.php");
+		try
+		{
+		$sql = "SELECT `username`, `id` FROM `Login`";
+			$statement = $conn->prepare($sql);
+			$statement->execute();	
+			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+			$conn = null;  			// Disconnect
+			return showuser_access_rows($rows);
+		}
+		catch(PDOException $e) 
+		{
+				return $e->getMessage();
+		}
+	}
+	
+	/******************
 	Show Users
 	******************/
-	function showusers()
+	function showusers_change()
 	{	
 		$conn = connect();
 		include("user.php");
@@ -180,7 +224,7 @@
 			$statement->execute();	
 			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 			$conn = null;  			// Disconnect
-			return showuser_rows($rows);
+			return showuser_change_rows($rows);
 		}
 		catch(PDOException $e) 
 		{
