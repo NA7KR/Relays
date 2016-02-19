@@ -193,7 +193,7 @@
 	******************/
 	function updateaccess($username,$relay1,$relay2,$relay3,$relay4,$relay5,$relay6,$relay7,$relay8,$relayall,$admin)
 	{
-			$conn = connect();
+		$conn = connect();
 		try
 		 {
 				$sql = "UPDATE `Access`  
@@ -208,7 +208,7 @@
 					`Relay 8` = :relay8, 
 					`Relay All` =:relayall,
 					`Admin`		=:admin
-				WHERE  Select `id` WHERE `username`=$username";
+				WHERE  `login_id` = (Select `id` From `Login` WHERE `username` = '$username')";
 		
 				$statement = $conn->prepare($sql);
 				$statement->bindValue(":relay1", $relay1);
@@ -219,8 +219,8 @@
 				$statement->bindValue(":relay6", $relay6);
 				$statement->bindValue(":relay7", $relay7);
 				$statement->bindValue(":relay8", $relay8); 
-				$statement->bindValue(":Relay All", $relayall);
-				$statement->bindValue(":Admin", $admin); 
+				$statement->bindValue(":relayall", $relayall);
+				$statement->bindValue(":admin", $admin); 
 				$count = $statement->execute();	
 				$conn = null;        // Disconnect	
 			}

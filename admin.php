@@ -25,17 +25,13 @@
 		$saved = savepostrelaynames();
     }
 	if(isset($_POST['saveaccess'])) {
-		$shownames_active = true;
-		$msg = shownaccess();
+		$shownaccess_active = true;
 		include("access.php");
 		$saved = savepostaccess();
     }
 	
-
-	
 	 if(isset($_POST['shownaccess'])) {
 		$shownaccess_active = true;
-		
 		$msg = showusers();
     }
 	
@@ -56,6 +52,7 @@
 <html>
     <head>
 	<script>
+	
 	function showUser(str) {
 		if (str == "") {
 			document.getElementById("txtHint").innerHTML = "";

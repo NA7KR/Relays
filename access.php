@@ -3,22 +3,23 @@
 	{
 		$msg =  "<table>";
 		$msg .=  "<tr>";
-		$msg .= "<td>User Name</td>";
-		$msg .= "<td>Relay 1</td>";
-		$msg .= "<td>Relay 2</td>";
-		$msg .= "<td>Relay 3</td>";
-		$msg .= "<td>Relay 4</td>";
-		$msg .= "<td>Relay 5</td>";
-		$msg .= "<td>Relay 6</td>";
-		$msg .= "<td>Relay 7</td>";
-		$msg .= "<td>Relay 8</td>";
-		$msg .= "<td>Relay All</td>";
-		$msg .= "<td>Admin</td>";
+		$msg .= "<th>User Name</th>";
+		$msg .= "<th>Relay 1</th>";
+		$msg .= "<th>Relay 2</th>";
+		$msg .= "<th>Relay 3</th>";
+		$msg .= "<th>Relay 4</th>";
+		$msg .= "<th>Relay 5</th>";
+		$msg .= "<th>Relay 6</th>";
+		$msg .= "<th>Relay 7</th>";
+		$msg .= "<th>Relay 8</th>";
+		$msg .= "<th>Relay All</th>";
+		$msg .= "<th>Admin</th>";
 		$msg  .=  "	</tr>";
 				
 		
 		$msg .=  "<tr>";
-		$msg .= "<td><input type=\"text\" name=\"username\" value=\"" . $access_row['username'] . "\"   ></td>\n";
+		$msg .= "<td>" . $access_row['username'] ."</td>\n";
+		$msg .= "<input type=\"hidden\" value=" . $access_row['username'] ." name=\"username\" />";
 		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay1\" " .  checked($access_row['Relay 1']) . " class=\"relay\" ></td>\n";
 		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay2\" " .  checked($access_row['Relay 2']) . " class=\"relay\"  ></td>\n";
 		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay3\" " .  checked($access_row['Relay 3']) . " class=\"relay\" ></td>\n";
@@ -42,16 +43,33 @@
 	{
 		$msg = updateaccess(
 							$_POST["username"],
-							$_POST["relay1"],
-							$_POST["relay2"],
-							$_POST["relay3"],
-							$_POST["relay4"],
-							$_POST["relay5"],
-							$_POST["relay6"],
-							$_POST["relay7"],
-							$_POST["relay8"],
-							$_POST["relayall"],
-							$_POST["admin"]);
+							onoff("relay1"),
+							onoff("relay2"),
+							onoff("relay3"),
+							onoff("relay4"),
+							onoff("relay5"),
+							onoff("relay6"),
+							onoff("relay7"),
+							onoff("relay8"),
+							onoff("relayall"),
+							onoff("admin"));
 		return  $msg;
 	}
+	
+	/******************
+	On Off on =1 and stop Notice: Undefined index
+	******************/
+	function onoff($state)
+	{
+		if(isset($_POST[$state]))
+		{
+			if($_POST[$state] != null)
+				return "1";
+			else
+				return "0";
+		}
+		else
+			return "0";
+	}
+	
 ?>
