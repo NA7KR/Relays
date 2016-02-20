@@ -1,23 +1,24 @@
 <?php
 	function access_row_f($access_row)
 	{
-		$msg =  "<table>";
-		$msg .=  "<tr>";
-		$msg .= "<th>User Name</th>";
-		$msg .= "<th>Relay 1</th>";
-		$msg .= "<th>Relay 2</th>";
-		$msg .= "<th>Relay 3</th>";
-		$msg .= "<th>Relay 4</th>";
-		$msg .= "<th>Relay 5</th>";
-		$msg .= "<th>Relay 6</th>";
-		$msg .= "<th>Relay 7</th>";
-		$msg .= "<th>Relay 8</th>";
-		$msg .= "<th>Relay All</th>";
-		$msg .= "<th>Admin</th>";
-		$msg  .=  "	</tr>";
+
+		$msg =  "<table>\n";
+		$msg .=  "<tr>\n";
+		$msg .= "<th>User Name</th>\n";
+		$msg .= "<th>Relay 1</th>\n";
+		$msg .= "<th>Relay 2</th>\n";
+		$msg .= "<th>Relay 3</th>\n";
+		$msg .= "<th>Relay 4</th>\n";
+		$msg .= "<th>Relay 5</th>\n";
+		$msg .= "<th>Relay 6</th>\n";
+		$msg .= "<th>Relay 7</th>\n";
+		$msg .= "<th>Relay 8</th>\n";
+		$msg .= "<th>Relay All</th>\n";
+		$msg .= "<th>Admin</th>\n";
+		$msg  .=  "	</tr>\n";
 				
 		
-		$msg .=  "<tr>";
+		$msg .=  "<tr>\n";
 		$msg .= "<td>" . $access_row['username'] ."</td>\n";
 		$msg .= "<input type=\"hidden\" value=" . $access_row['username'] ." name=\"username\" />";
 		$msg .= "<td><input type=\"CHECKBOX\" name=\"relay1\" " .  checked($access_row['Relay 1']) . " class=\"relay\" ></td>\n";
@@ -32,7 +33,11 @@
 		$msg .= "<td><input type=\"CHECKBOX\" name=\"admin\" " . checked($access_row['Admin']) . " class=\"relay\"  ></td>\n";
 		$msg  .=  "	</tr>";
 		
-		$msg  .=  "	</table>";
+		$msg  .=  "	</table>\n";
+		$msg .= "<table>\n";
+		$msg .= "<tr>\n";
+		$msg .= "  <td><input type=\"submit\" name=\"saveaccess\" value=\"Save Access\" class=\"inputadmin\"></td>\n";
+		$msg .= "</tr>\n";
 		return $msg;
 	}
 	

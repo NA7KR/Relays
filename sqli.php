@@ -163,7 +163,7 @@
 		include("user.php");
 		try
 		{
-			$sql = "SELECT `username` FROM `Login` WHERE `id`  = $id ";
+			$sql = "SELECT `username`,`Name`,`Email` FROM `Login` WHERE `id`  = $id ";
 			$statement = $conn->prepare($sql);
 			$statement->execute();	
 			
@@ -219,7 +219,7 @@
 		include("user.php");
 		try
 		{
-		$sql = "SELECT `username`, `id` FROM `Login`";
+		$sql = "SELECT `id`,`username`,`Name`,`Email` FROM `Login`";
 			$statement = $conn->prepare($sql);
 			$statement->execute();	
 			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);

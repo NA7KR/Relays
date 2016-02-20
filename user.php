@@ -14,18 +14,28 @@
 	
 function user_row_f($access_row)
 	{
-		$msg =  "<table>";
-		$msg .=  "<tr>";
-		$msg .= "<th>User Name</th>";
-		$msg  .=  "	</tr>";
+		$msg =  "<table>\n";
+		$msg .=  "<tr>\n";
+		$msg .= "<th>User Name</th>\n";
+		$msg .= "<th>Name</th>\n";
+		$msg .= "<th>Email</th>\n";
+		$msg  .=  "	</tr>\n";
 				
-		
-		$msg .=  "<tr>";
+		$msg .=  "<tr>\n";
 		$msg .= "<td>" . $access_row['username'] ."</td>\n";
-		$msg .= "<input type=\"hidden\" value=" . $access_row['username'] ." name=\"username\" />";
-		$msg  .=  "	</tr>";
+		$msg .= "<td>" . $access_row['Name'] ."</td>\n";
+		$msg .= "<td>" . $access_row['Email'] ."</td>\n";
+		$msg .= "<input type=\"hidden\" value=" . $access_row['username'] ." name=\"username\" />\n";
+		$msg  .=  "	</tr>\n";
 		
-		$msg  .=  "	</table>";
+		$msg  .=  "	</table>\n";
+		$msg  .= "<table>\n";
+		$msg  .= "<tr>\n";
+		$msg  .= "  <td><input type=\"submit\" name=\"changepassword\" value=\"Change Password\" class=\"inputadmin\"></td>\n";
+		$msg  .= "</tr>\n";
+		$msg  .= "<tr>\n";
+		$msg  .= "  <td><input type=\"submit\" name=\"deluser\" value=\"Delete User\" class=\"inputadmin\"></td>\n";
+		$msg  .= "</tr>\n";
 		return $msg;
 	}
 	

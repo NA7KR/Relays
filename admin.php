@@ -35,6 +35,14 @@
 		$msg = showusers_access();
     }
 	
+	 if(isset($_POST['changepassword'])) {
+		$shownaccess_active = true;
+		include("passwdch.php");
+		$msg = passwordchange();
+    }
+	
+
+	
 	/******************
 	Check if Admin
 	******************/
@@ -132,40 +140,22 @@
 						if ($saved == 0)
 						{
 							echo $msg;
-							
-							echo "<table>";
-							echo "<tr>";
-							echo "  <td><input type=\"submit\" name=\"changepassword\" value=\"Change Password\" class=\"inputadmin\"></td>";
-							echo "</tr>";
 						}
-						else
-						{
-								echo "<table>";
-						}
-						echo "<tr>";
-						echo "  <td><input type=\"submit\" name=\"adduser\" value=\"Add User\" class=\"inputadmin\"></td>";
-						echo "</tr>";
-						echo "<tr>";
-						echo "  <td><input type=\"submit\" name=\"deluser\" value=\"Delete User\" class=\"inputadmin\"></td>";
-						echo "</tr>";
-						echo "<tr>";
-						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
-						echo "</tr>";
+						echo "<table>\n";
+						echo "<tr>\n";
+						echo "  <td><input type=\"submit\" name=\"adduser\" value=\"Add User\" class=\"inputadmin\"></td>\n";
+						echo "</tr>\n";
+						echo "<tr>\n";
+						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>\n";
+						echo "</tr>\n";
 					}
 				elseif( $shownaccess_active  )
 					{
 						if ($saved == 0)
 						{
 							echo $msg;
-							echo "<table>";
-							echo "<tr>";
-							echo "  <td><input type=\"submit\" name=\"saveaccess\" value=\"Save Access\" class=\"inputadmin\"></td>";
-							echo "</tr>";
 						}
-						else
-						{
-								echo "<table>";
-						}
+						echo "<table>";
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
 						echo "</tr>";
