@@ -12,18 +12,89 @@
 		
 		validationElement.style.display = 'none';
 		validationElement.className = 'validation-image';
+		validationElement.style.display = 'inline-block';
 		// Check if password2 isn't null or undefined or empty
-		document.getElementById('savepasswd').disabled = true;
-		if (password2) {
+		
+		/*if (password2) {
 			// Show the validation element
 			validationElement.style.display = 'inline-block';
 			// Choose which class to add to the element
-			document.getElementById('savepasswd').disabled = false;
+			document.getElementById('savepasswd').disabled = true;
 			validationElement.className += 
 				(password1 == password2 ? ' validation-success' : ' validation-error');
-		}
+		} */
+		
+		if  (password1 == password2)
+			{
+				document.getElementById('savepasswd').disabled = false;
+				validationElement.className +=	' validation-success';
+				document.getElementById('savepasswd').className = "inputadmin";
+			}
+			else
+			{
+				document.getElementById('savepasswd').disabled = true;
+				validationElement.className +=	' validation-error';
+				document.getElementById('savepasswd').className = "inputadminfalse";
+			}	
+		
 	}
 
+	function CheckPasswordStrength(password) {
+            var password_strength = document.getElementById("password_strength");
+
+            //TextBox left blank.
+            if (password.length == 0) {
+                password_strength.innerHTML = "";
+                return;
+            }
+
+            //Regular Expressions.
+            var regex = new Array();
+            regex.push("[A-Z]"); //Uppercase Alphabet.
+            regex.push("[a-z]"); //Lowercase Alphabet.
+            regex.push("[0-9]"); //Digit.
+            regex.push("[$@$!%*#?&]"); //Special Character.
+
+            var passed = 0;
+
+            //Validate for each Regular Expression.
+            for (var i = 0; i < regex.length; i++) {
+                if (new RegExp(regex[i]).test(password)) {
+                    passed++;
+                }
+            }
+
+            //Validate for length of Password.
+            if (passed > 2 && password.length > 8) {
+                passed++;
+            }
+
+            //Display status.
+            var color = "";
+            var strength = "";
+            switch (passed) {
+                case 0:
+                case 1:
+                    strength = "Weak";
+                    color = "red";
+                    break;
+                case 2:
+                    strength = "Good";
+                    color = "darkorange";
+                    break;
+                case 3:
+                case 4:
+                    strength = "Strong";
+                    color = "green";
+                    break;
+                case 5:
+                    strength = "Very Strong";
+                    color = "darkgreen";
+                    break;
+            }
+            password_strength.innerHTML = strength;
+            password_strength.style.color = color;
+        }
 	
 	function showUserAccess(str) {
 		if (str == "") {

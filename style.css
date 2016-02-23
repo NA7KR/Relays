@@ -17,6 +17,13 @@ border-radius:10px 10px 0 0;
 margin:-10px -40px;
 padding:15px
 }
+h1 {
+background-color:#FEFFED;
+text-align:center;
+border-radius:10px 10px 0 0;
+margin:-10px -40px;
+padding:15px
+}
 hr {
 border:0;
 border-bottom:1px solid #ccc;
@@ -77,6 +84,17 @@ margin-bottom:15px
 input[type=submit].inputadmin {
 width:200;
 background-color:#FFCB00;
+color:#fff;
+border:2px solid #FFCB00;
+padding:10px;
+font-size:20px;
+cursor:pointer;
+border-radius:5px;
+margin-bottom:15px
+}
+input[type=submit].inputadminfalse {
+width:200;
+background-color:#FF0000;
 color:#fff;
 border:2px solid #FFCB00;
 padding:10px;
@@ -155,3 +173,29 @@ th {
     
 }
 
+.absoluteCenter {
+ /* Must manually set width/height */
+ width:800px;
+ height:300px;
+
+ /* The magic centering code */
+ margin:auto;
+ position:absolute;
+ top:10%;bottom:0; /* Aligns Vertically - Remove for Horizontal Only */
+ left:0;right:0; /* Aligns Horizontally - Remove for Vertical Only  */
+
+ /* Prevent div from overflowing main window */
+ max-width:100%;
+ max-height:100%;
+ overflow:auto;
+}
+
+/* IE 7 and Below */
+:first-child+html .absoluteCenter,
+* html .absoluteCenter {
+ /* Place code here to override all above values, and add IE friendly centering */
+}
+
+body { 
+    background: #ffffee; 
+}

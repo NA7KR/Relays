@@ -41,7 +41,7 @@ header("location: profile.php");
     <body>
         <div id="main">
             <h1>Login</h1>
-            <div id="login">
+            <div  class="absoluteCenter" id="login">
                 <h2>Login Form</h2>
                 <form action="index.php" method="post">
 				<br>
