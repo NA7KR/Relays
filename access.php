@@ -1,4 +1,7 @@
 <?php
+	/******************
+	Access Row info
+	******************/
 	function access_row_f($access_row)
 	{
 

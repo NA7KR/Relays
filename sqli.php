@@ -233,6 +233,34 @@
 	}
 	
 	/******************
+	Save Password 
+	******************/
+	function savepasswordmysql($username,$password)
+	{
+		$conn = connect();
+		try
+		 {
+				$sql = "UPDATE `Login`  
+				SET  
+					`username` = :username, 
+					`password` = :password
+				WHERE `username` = '$username'";
+				
+				$statement = $conn->prepare($sql);
+				$statement->bindValue(":username", $username);
+				$statement->bindValue(":password", $password); 
+				$count = $statement->execute();	
+				$conn = null;        // Disconnect	
+			}
+			catch(PDOException $e) 
+			{
+				return $e->getMessage();
+			}
+			// If the query is succesfully performed ($count not false)
+			if($count != false) return $count;       // Shows the number of affected rows
+	}
+	
+	/******************
 	Update Access 
 	******************/
 	function updateaccess($username,$relay1,$relay2,$relay3,$relay4,$relay5,$relay6,$relay7,$relay8,$relayall,$admin)

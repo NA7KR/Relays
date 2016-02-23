@@ -41,6 +41,12 @@
 		$msg = passwordchange();
     }
 	
+	if(isset($_POST['savepasswd'])) {
+		$shownaccess_active = true;
+		include("passwdch.php");
+		$msg = passwordsave();
+    }
+	
 	/******************
 	Check if Admin
 	******************/
