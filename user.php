@@ -36,6 +36,9 @@ function user_row_f($access_row)
 		$msg  .= "<tr>\n";
 		$msg  .= "  <td><input type=\"submit\" name=\"deluser\" value=\"Delete User\" class=\"inputadmin\"></td>\n";
 		$msg  .= "</tr>\n";
+		$msg  .= "<tr>\n";
+		$msg  .=  "<td><input type=\"submit\" name=\"edituser\" value=\"Edit Info\" class=\"inputadmin\"></td>\n";
+		$msg  .= "</tr>\n";
 		return $msg;
 	}
 	

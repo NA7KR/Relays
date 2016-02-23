@@ -44,12 +44,26 @@ header("location: profile.php");
             <div id="login">
                 <h2>Login Form</h2>
                 <form action="index.php" method="post">
-                    <label>UserName :</label>
-                    <input id="name" name="username" placeholder="username" type="text">
-                    <label>Password :</label>
-                    <input id="password" name="password" placeholder="**********" type="password">
-                    <input name="submit" type="submit" value="Login" >
-                    <span><?php echo $error; ?></span>
+				<br>
+				<br>
+					<table>
+						<tr>
+							<td>UserName:</td>
+							<td><input id="name" name="username" placeholder="username" type="text"></td>
+						</tr>
+						<tr>
+							<td>Password:</td>
+							<td><input id="password" name="password" placeholder="**********" type="password"></td>
+						</tr>
+						<tr>
+							<td align="center" colspan="2"><input name="submit" type="submit" value="Login" ><td>
+						</tr>
+						<tr>
+							<td align="center" colspan="2"><span><?php echo $error; ?></span><td>
+						</tr>
+					</table>
+					<br>	
+						
                 </form>
         </div>
         </div>

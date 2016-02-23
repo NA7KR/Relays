@@ -41,8 +41,6 @@
 		$msg = passwordchange();
     }
 	
-
-	
 	/******************
 	Check if Admin
 	******************/
@@ -59,56 +57,12 @@
 ?>
 <html>
     <head>
-	<script>
-	
-	function showUserAccess(str) {
-		if (str == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		 } else { 
-			if (window.XMLHttpRequest) {
-				// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp = new XMLHttpRequest();
-			} else {
-				// code for IE6, IE5
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			 }
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-				 }
-			};
-			xmlhttp.open("GET","getuseraccess.php?q="+str,true);
-			xmlhttp.send();
-		}
-	}
-	function showUserChange(str) {
-		if (str == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		 } else { 
-			if (window.XMLHttpRequest) {
-				// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp = new XMLHttpRequest();
-			} else {
-				// code for IE6, IE5
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			 }
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-				 }
-			};
-			xmlhttp.open("GET","getuserchange.php?q="+str,true);
-			xmlhttp.send();
-		}
-	}
-	</script>
+<?php include("java.php"); ?>
     <title>Relay Admin</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <form action="admin.php" method="post">
+        <form name="Admin" action="admin.php" method="post">
             <div id="profile">
                 <b id="welcome">Welcome Admin: <i><?php echo  $login_session; ?></i></b>
                 <b id="logout"><a href="logout.php">Log Out</a></b>
@@ -139,15 +93,18 @@
 					{
 						if ($saved == 0)
 						{
-							echo $msg;
+							echo $msg;		
 						}
-						echo "<table>\n";
-						echo "<tr>\n";
-						echo "  <td><input type=\"submit\" name=\"adduser\" value=\"Add User\" class=\"inputadmin\"></td>\n";
-						echo "</tr>\n";
-						echo "<tr>\n";
-						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>\n";
-						echo "</tr>\n";
+						echo "<table>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"adduser\" value=\"Add User\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"deluser\" value=\"Delete User\" class=\"inputadmin\"></td>";
+						echo "</tr>";
+						echo "<tr>";
+						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
+						echo "</tr>";
 					}
 				elseif( $shownaccess_active  )
 					{
@@ -155,6 +112,7 @@
 						{
 							echo $msg;
 						}
+						
 						echo "<table>";
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";
