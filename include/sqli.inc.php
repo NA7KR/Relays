@@ -303,4 +303,26 @@
 			// If the query is succesfully performed ($count not false)
 			if($count != false) return $count;       // Shows the number of affected rows
 	}
+	
+	/******************
+	Delte User 
+	******************/
+	function deleteusermysql($username)
+	{
+		$conn = connect();
+		try
+		 {
+				$sql = "DELETE FROM `Login` WHERE `Login`.`username` = \"$username\" LIMIT 1";
+					
+				$statement = $conn->prepare($sql);	
+				$count = $statement->execute();	
+				$conn = null;        // Disconnect	
+			}
+			catch(PDOException $e) 
+			{
+				return $e->getMessage();
+			}
+			// If the query is succesfully performed ($count not false)
+			if($count != false) return $count;       // Shows the number of affected rows
+	}
 ?>

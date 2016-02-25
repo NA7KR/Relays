@@ -53,10 +53,22 @@
 		$msg = deluser();
     }
 	
-	if(isset($_POST['DeleteUser'])) {
+	if(isset($_POST['adduser'])) {
+		$shownaccess_active = true;
+		include("include/adduser.inc.php");
+		$msg = adduser();
+    }
+	
+	if(isset($_POST['deleteuser'])) {
 		$shownaccess_active = true;
 		include("include/deluser.inc.php");
-		$msg = delusercheck();
+		$msg = deleteduser();
+    }
+
+	if(isset($_POST['edituser'])) {
+		$shownaccess_active = true;
+		include("include/edituser.inc.php");
+		$msg = edituser();
     }
 	
 	/******************
