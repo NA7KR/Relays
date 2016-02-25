@@ -4,7 +4,7 @@
 	$shownames_active = false;
 	$saved = 0;
 	$msg = "";
-	include('session.php');
+	include('session.inc.php');
 	if(isset($_POST['goback'])) {
         header("Location: profile.php"); // Redirecting To main
     }
@@ -15,18 +15,18 @@
    
     if(isset($_POST['shownames'])) {
 		$shownames_active = true;
-		include("relay.php");
+		include("relay.inc.php");
 		$msg = showrelaynames();
     }
 	if(isset($_POST['save'])) {
 		$shownames_active = true;
-		include("relay.php");
+		include("relay.inc.php");
 		$msg = showrelaynames();
 		$saved = savepostrelaynames();
     }
 	if(isset($_POST['saveaccess'])) {
 		$shownaccess_active = true;
-		include("access.php");
+		include("access.inc.php");
 		$saved = savepostaccess();
     }
 	
@@ -37,14 +37,26 @@
 	
 	 if(isset($_POST['changepassword'])) {
 		$shownaccess_active = true;
-		include("passwdch.php");
+		include("passwdch.inc.php");
 		$msg = passwordchange();
     }
 	
 	if(isset($_POST['savepasswd'])) {
 		$shownaccess_active = true;
-		include("passwdch.php");
+		include("passwdch.inc.php");
 		$msg = passwordsave();
+    }
+	
+	if(isset($_POST['deluser'])) {
+		$shownaccess_active = true;
+		include("deluser.inc.php");
+		$msg = deluser();
+    }
+	
+	if(isset($_POST['DeleteUser'])) {
+		$shownaccess_active = true;
+		include("deluser.inc.php");
+		$msg = delusercheck();
     }
 	
 	/******************
@@ -54,7 +66,7 @@
 	//end access save as array $access_row
 	if ($access_row['Admin']) 
 	{
-		
+	
 	}
 	else
 	{
@@ -104,9 +116,6 @@
 						echo "<table>";
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"adduser\" value=\"Add User\" class=\"inputadmin\"></td>";
-						echo "</tr>";
-						echo "<tr>";
-						echo "  <td><input type=\"submit\" name=\"deluser\" value=\"Delete User\" class=\"inputadmin\"></td>";
 						echo "</tr>";
 						echo "<tr>";
 						echo "  <td><input type=\"submit\" name=\"admin\" value=\"Back to Admin\" class=\"inputadmin\"></td>";

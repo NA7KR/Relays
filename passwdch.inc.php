@@ -33,8 +33,7 @@
 	function passwordsave()
 	{
 		$username=$_POST['username'];
-        $password=$_POST['password1'];      
-			
+		$password=$_POST['password1'];      
 		$encrypt_password="*" . sha1(sha1($password,true));
 		$msg = savepasswordmysql($username,$encrypt_password);
 		$msg .= "Saved " .  $_POST['username']  ;
@@ -46,6 +45,7 @@
 	******************/
 	function passwordchangeuser()
 	{
+		include("java.php");
 		if(isset($_POST['username'])) {
 			
 			$msg = "<input type=\"hidden\" value=\"1\" name=\"passwordchangesave\" />\n";

@@ -56,8 +56,18 @@ header("location: profile.php");
 							<td><input id="password" name="password" placeholder="**********" type="password"></td>
 						</tr>
 						<tr>
+							<td align="center" colspan="2"><span>  </span><td>
+						</tr>
+						<tr>
+							<td align="center" colspan="2"><span>  </span><td>
+						</tr>
+						<tr>
+							<td align="center" colspan="2"><span>  </span><td>
+						</tr>
+						<tr>
 							<td align="center" colspan="2"><input name="submit" type="submit" value="Login" ><td>
 						</tr>
+						
 						<tr>
 							<td align="center" colspan="2"><span><?php echo $error; ?></span><td>
 						</tr>

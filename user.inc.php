@@ -1,5 +1,7 @@
 <?php
-
+	/******************
+	Change User Row 
+	******************/
 	function showuser_change_rows($rows)
 	{
 		$msg = "<select name=\"users\" onchange=\"showUserChange(this.value)\">";
@@ -12,7 +14,10 @@
 		return $msg;
 	}
 	
-function user_row_f($access_row)
+	/******************
+	User Row 
+	******************/
+	function user_row_f($access_row)
 	{
 		$msg =  "<table>\n";
 		$msg .=  "<tr>\n";
@@ -41,5 +46,4 @@ function user_row_f($access_row)
 		$msg  .= "</tr>\n";
 		return $msg;
 	}
-	
 ?>

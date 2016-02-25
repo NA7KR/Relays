@@ -1,8 +1,0 @@
-<?php
-
-$dbusername = "root";
-$dbpassword = "Password";
-$dbdatabase = "Relay";
-$dbhost = "localhost";
-
-?>

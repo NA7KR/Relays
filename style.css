@@ -61,7 +61,7 @@ font-family:raleway
 }
 
 input[type=text].relay  {
-width:80px;
+width:200px;
 padding:10px;
 margin-top:8px;
 border:1px solid #ccc;
@@ -71,7 +71,7 @@ font-family:raleway
 }
 
 input[type=submit] {
-width:80;
+width:200px;
 background-color:#FFCB00;
 color:#fff;
 border:2px solid #FFCB00;
@@ -82,7 +82,7 @@ border-radius:5px;
 margin-bottom:15px
 }
 input[type=submit].inputadmin {
-width:200;
+width:200px;
 background-color:#FFCB00;
 color:#fff;
 border:2px solid #FFCB00;
@@ -93,7 +93,7 @@ border-radius:5px;
 margin-bottom:15px
 }
 input[type=submit].inputadminfalse {
-width:200;
+width:200px;
 background-color:#FF0000;
 color:#fff;
 border:2px solid #FFCB00;
@@ -104,7 +104,7 @@ border-radius:5px;
 margin-bottom:15px
 }
 input[type=submit].inputtrue{
-width:80;
+width:200px;
 background-color:#44C444;
 color:#fff;
 border:2px solid #FFCB00;
@@ -115,7 +115,7 @@ border-radius:5px;
 margin-bottom:15px
 }
 input[type=submit].inputfalse {
-width:80;
+width:200;
 background-color:#FF0000;
 color:#fff;
 border:2px solid #FFCB00;
