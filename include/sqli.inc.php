@@ -1,6 +1,6 @@
 <?php
 	error_reporting(E_ALL);
-	require("config.php");
+	require("include/config.inc.php");
 	
 	/******************
 	Connection PDO
@@ -137,7 +137,7 @@
 	function shownaccess($id)
 	{
 		$conn = connect();
-		include("access.inc.php");
+		include("include/access.inc.php");
 		try
 		{
 			$sql = "SELECT `Relay 1`, `Relay 2`, `Relay 3`, `Relay 4`, `Relay 5`, `Relay 6`, `Relay 7`, `Relay 8`, `Relay All`, `Admin`,`username` FROM `Access`, `Login` WHERE `id` =`login_id` and `login_id` = $id ";
@@ -160,7 +160,7 @@
 	Function showuserinfo($id)
 	{
 			$conn = connect();
-		include("user.inc.php");
+		include("include/user.inc.php");
 		try
 		{
 			$sql = "SELECT `username`,`Name`,`Email` FROM `Login` WHERE `id`  = $id ";
@@ -194,7 +194,7 @@
 	function showusers_access()
 	{	
 		$conn = connect();
-		include("access.inc.php");
+		include("include/access.inc.php");
 		try
 		{
 		$sql = "SELECT `username`, `id` FROM `Login`";
@@ -216,7 +216,7 @@
 	function showusers_change()
 	{	
 		$conn = connect();
-		include("user.inc.php");
+		include("include/user.inc.php");
 		try
 		{
 		$sql = "SELECT `id`,`username`,`Name`,`Email` FROM `Login`";

@@ -1,5 +1,5 @@
 <?php
-    include('session.inc.php');
+    include('include/session.inc.php');
 	$msg = "";
 	$passwordchangeusercheck=false;
 	
@@ -69,7 +69,7 @@
     }
 	if(isset($_POST['savepasswd'])) {
 		$shownaccess_active = true;
-		include("passwdch.inc.php");
+		include("include/passwdch.inc.php");
 		$msg = passwordsave();
     }
 	
@@ -258,7 +258,7 @@
 				<?php 	
 				if ($passwordchangeusercheck)
 						{
-							include("passwdch.inc.php");
+							include("include/passwdch.inc.php");
 							echo passwordchangeuser();
 						}
 				else

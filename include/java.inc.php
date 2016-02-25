@@ -113,7 +113,7 @@
 					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
 				 }
 			};
-			xmlhttp.open("GET","getuseraccess.inc.php?q="+str,true);
+			xmlhttp.open("GET","getuseraccess.php?q="+str,true);
 			xmlhttp.send();
 		}
 	}
@@ -134,7 +134,7 @@
 					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
 				 }
 			};
-			xmlhttp.open("GET","getuserchange.inc.php?q="+str,true);
+			xmlhttp.open("GET","getuserchange.php?q="+str,true);
 			xmlhttp.send();
 		}
 	}

@@ -1,5 +1,5 @@
 <?php
-	require_once("sqli.php");			
+	require_once("include/sqli.inc.php");			
 	session_start();// Starting Session
 	/******************
 	Storing Session 

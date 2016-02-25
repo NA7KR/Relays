@@ -1,5 +1,5 @@
 <?php
-	require_once("sqli.php");			//our file which holds our sql functions 
+	require_once("include/sqli.inc.php");			//our file which holds our sql functions 
     session_start(); // Starting Session
     $error=''; // Variable To Store Error Message
     if (isset($_POST['submit'])) 

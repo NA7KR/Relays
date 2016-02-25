@@ -4,7 +4,7 @@
 	$shownames_active = false;
 	$saved = 0;
 	$msg = "";
-	include('session.inc.php');
+	include('include/session.inc.php');
 	if(isset($_POST['goback'])) {
         header("Location: profile.php"); // Redirecting To main
     }
@@ -15,18 +15,18 @@
    
     if(isset($_POST['shownames'])) {
 		$shownames_active = true;
-		include("relay.inc.php");
+		include("include/relay.inc.php");
 		$msg = showrelaynames();
     }
 	if(isset($_POST['save'])) {
 		$shownames_active = true;
-		include("relay.inc.php");
+		include("include/relay.inc.php");
 		$msg = showrelaynames();
 		$saved = savepostrelaynames();
     }
 	if(isset($_POST['saveaccess'])) {
 		$shownaccess_active = true;
-		include("access.inc.php");
+		include("include/access.inc.php");
 		$saved = savepostaccess();
     }
 	
@@ -37,25 +37,25 @@
 	
 	 if(isset($_POST['changepassword'])) {
 		$shownaccess_active = true;
-		include("passwdch.inc.php");
+		include("include/passwdch.inc.php");
 		$msg = passwordchange();
     }
 	
 	if(isset($_POST['savepasswd'])) {
 		$shownaccess_active = true;
-		include("passwdch.inc.php");
+		include("include/passwdch.inc.php");
 		$msg = passwordsave();
     }
 	
 	if(isset($_POST['deluser'])) {
 		$shownaccess_active = true;
-		include("deluser.inc.php");
+		include("include/deluser.inc.php");
 		$msg = deluser();
     }
 	
 	if(isset($_POST['DeleteUser'])) {
 		$shownaccess_active = true;
-		include("deluser.inc.php");
+		include("include/deluser.inc.php");
 		$msg = delusercheck();
     }
 	
@@ -75,7 +75,7 @@
 ?>
 <html>
     <head>
-<?php include("java.php"); ?>
+<?php include("include/java.inc.php"); ?>
     <title>Relay Admin</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     </head>

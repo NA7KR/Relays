@@ -45,7 +45,7 @@
 	******************/
 	function passwordchangeuser()
 	{
-		include("java.php");
+		include("include/java.inc.php");
 		if(isset($_POST['username'])) {
 			
 			$msg = "<input type=\"hidden\" value=\"1\" name=\"passwordchangesave\" />\n";
