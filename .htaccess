@@ -7,3 +7,8 @@ php_value error_log  /var/log/apache2/PHP_errors.log
 	Order allow,deny
 	Deny from all
 </Files>
+RewriteEngine On
+
+
+# Resolve .php file for extensionless php urls
+RewriteRule ^([^/\.]+)/?$ $1.php  [L,QSA]

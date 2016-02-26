@@ -70,6 +70,12 @@
 		include("include/edituser.inc.php");
 		$msg = edituser();
     }
+	if(isset($_POST['adduserpost'])) {
+		$shownaccess_active = true;
+		include("include/adduser.inc.php");
+		$msg = adduserpost();
+    }
+	
 	
 	/******************
 	Check if Admin

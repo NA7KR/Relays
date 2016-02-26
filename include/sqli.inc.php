@@ -325,4 +325,32 @@
 			// If the query is succesfully performed ($count not false)
 			if($count != false) return $count;       // Shows the number of affected rows
 	}
+	
+	function insertadduser($username,$name,$email,$password)
+	{	
+		$conn = connect();
+		try
+		 {
+				$sql = "INSERT INTO `Login`  
+				SET  
+					`username` = :username, 
+					`password` = :password, 
+					`Name` = :Name, 
+					`Email` = :Email";
+		
+				$statement = $conn->prepare($sql);
+				$statement->bindValue(":username", $username);
+				$statement->bindValue(":password", $password); 
+				$statement->bindValue(":Name", $name);
+				$statement->bindValue(":Email", $email); 
+				$count = $statement->execute();	
+				$conn = null;        // Disconnect	
+			}
+			catch(PDOException $e) 
+			{
+				return $e->getMessage();
+			}
+			// If the query is succesfully performed ($count not false)
+			if($count != false) return $count;       // Shows the number of affected rows	
+	}
 ?>
