@@ -12,3 +12,6 @@ RewriteEngine On
 
 # Resolve .php file for extensionless php urls
 RewriteRule ^([^/\.]+)/?$ $1.php  [L,QSA]
+
+ErrorDocument 404 /include/index.php
+ErrorDocument 403 /include/index.php

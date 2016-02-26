@@ -3,7 +3,7 @@
 	<head>
 		<title>404</title>
 		<meta name="keywords" content="404" />
-		<link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
+		<link href="/include/css/style.css" rel="stylesheet" type="text/css"  media="all" />
 	</head>
 	<body>
 		<!--start-wrap--->
@@ -17,9 +17,9 @@
 			<!---End-header---->
 			<!--start-content------>
 			<div class="content">
-				<img src="images/error-img.png" title="error" />
+				<img src="/include/images/error-img.png" title="error" />
 				<p><span><label>O</label>hh.....</span>You Requested the page that is no longer There.</p>
-				<a href="../">Back To Home</a>
+				<a href="/include/">Back To Home</a>
 				<div class="copy-right">
 					<p>NA7KR</a></p>
 				</div>
