@@ -75,6 +75,11 @@
 		include("include/adduser.inc.php");
 		$msg = adduserpost();
     }
+	if(isset($_POST['editusersave'])) {
+		$shownaccess_active = true;
+		include("include/edituser.inc.php");
+		$msg = editusersave();
+    }
 	
 	
 	/******************

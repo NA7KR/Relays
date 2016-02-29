@@ -1,4 +1,6 @@
 <?php
+if(isset($_SESSION['login_user']))
+{
 	/******************
 	Change User Row 
 	******************/
@@ -46,4 +48,5 @@
 		$msg  .= "</tr>\n";
 		return $msg;
 	}
+}
 ?>

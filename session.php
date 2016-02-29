@@ -1,5 +1,6 @@
 <?php
-	require_once("include/sqli.inc.php");			
+	require_once("include/sqli.inc.php");
+	ini_set("session.cookie_httponly", True);
 	session_start();// Starting Session
 	/******************
 	Storing Session 

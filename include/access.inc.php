@@ -1,4 +1,6 @@
 <?php
+if(isset($_SESSION['login_user']))
+{
 	require_once("include/sqli.inc.php");			
 
 
@@ -96,5 +98,5 @@
 		$msg .="<div id=\"txtHint\"><b>Person info will be listed here...</b></div>";
 		return $msg;
 	}
-	
+}	
 ?>

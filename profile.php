@@ -1,5 +1,7 @@
 <?php
-    include('include/session.inc.php');
+include('include/session.inc.php');
+
+    
 	$msg = "";
 	$passwordchangeusercheck=false;
 	

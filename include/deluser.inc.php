@@ -1,4 +1,6 @@
 <?php
+if(isset($_SESSION['login_user']))
+{
 	/******************
 	Pre Delete User
 	******************/
@@ -34,5 +36,5 @@
 		return $msg;
 	}
 	
-	
+}	
 ?>

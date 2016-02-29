@@ -1,4 +1,7 @@
 <?php
+if(isset($_SESSION['login_user']))
+{
+
 	/******************
 	Password setup
 	******************/
@@ -71,4 +74,5 @@
 			return $msg;
 		}
 	}
+}
 ?>

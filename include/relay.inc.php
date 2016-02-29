@@ -1,4 +1,6 @@
 <?php
+if(isset($_SESSION['login_user']))
+{
 	
 	/******************
 	Save Names
@@ -60,5 +62,5 @@
 		$msg  .=  "	</table>";
 		return  $msg;
 	}	
-	
+}
 ?>

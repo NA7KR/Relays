@@ -353,4 +353,57 @@
 			// If the query is succesfully performed ($count not false)
 			if($count != false) return $count;       // Shows the number of affected rows	
 	}
+	
+	/******************
+	Show users info Edit User
+	******************/
+	Function showuserinfoedit($username)
+	{
+			$conn = connect();
+		include("include/user.inc.php");
+		try
+		{
+			$sql = "SELECT `id`,`username`,`Name`,`Email` FROM `Login` WHERE `username`  = \"$username\"";
+			$statement = $conn->prepare($sql);
+			$statement->execute();	
+			
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
+			$conn = null;        // Disconnect
+			return edituserrow($row);	
+		}
+		catch(PDOException $e) 
+		{
+				return $e->getMessage();
+		}
+	}
+	
+	/******************
+	Save users info Edit User
+	******************/
+	function editusersaved($id,$username,$name,$email)
+	{
+		$conn = connect();
+		try
+		 {
+				$sql = "UPDATE `Login`  
+				SET   
+					`username` = :username, 
+					`Name` = :Name, 
+					`Email` =:Email
+				WHERE `id` = '$id'";
+		
+				$statement = $conn->prepare($sql);
+				$statement->bindValue(":username", $username); 
+				$statement->bindValue(":Name", $name);
+				$statement->bindValue(":Email", $email); 
+				$count = $statement->execute();	
+				$conn = null;        // Disconnect	
+			}
+			catch(PDOException $e) 
+			{
+				return $e->getMessage();
+			}
+			// If the query is succesfully performed ($count not false)
+			if($count != false) return $count;       // Shows the number of affected rows
+	}
 ?>
