@@ -39,7 +39,11 @@ if(isset($_SESSION['login_user']))
 	}
 	function editusersave()
 	{
-		 editusersaved($_POST['id'],$_POST['username'],$_POST['name'],$_POST['email']);
+		editusersaved($_POST['id'],$_POST['username'],$_POST['name'],$_POST['email']);
 	}
+}
+else 
+{
+	echo "no session";
 }
 ?>

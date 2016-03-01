@@ -37,6 +37,7 @@ header("location: profile.php");
     <head>
     <title>Login Form</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     </head>
     <body>
         <div id="main">
@@ -56,20 +57,20 @@ header("location: profile.php");
 							<td><input id="password" name="password" placeholder="**********" type="password"></td>
 						</tr>
 						<tr>
-							<td align="center" colspan="2"><span>  </span><td>
+							<td  colspan="2"><span>  </span></td>
 						</tr>
 						<tr>
-							<td align="center" colspan="2"><span>  </span><td>
+							<td  colspan="2"><span>  </span></td>
 						</tr>
 						<tr>
-							<td align="center" colspan="2"><span>  </span><td>
+							<td  colspan="2"><span>  </span></td>
 						</tr>
 						<tr>
-							<td align="center" colspan="2"><input name="submit" type="submit" value="Login" ><td>
+							<td  colspan="2"><input name="submit" type="submit" value="Login" ></td>
 						</tr>
 						
 						<tr>
-							<td align="center" colspan="2"><span><?php echo $error; ?></span><td>
+							<td  colspan="2"><span><?php echo $error; ?></span></td>
 						</tr>
 					</table>
 					<br>	

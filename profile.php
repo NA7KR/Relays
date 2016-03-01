@@ -4,6 +4,7 @@ include('include/session.inc.php');
     
 	$msg = "";
 	$passwordchangeusercheck=false;
+	$editchangeuse_check=false;
 	
     if(isset($_POST['r1-on'])) {
         sendCommand(1,1);
@@ -73,6 +74,20 @@ include('include/session.inc.php');
 		$shownaccess_active = true;
 		include("include/passwdch.inc.php");
 		$msg = passwordsave();
+    }
+	
+	if(isset($_POST['editchangeuser'])) {
+		$shownaccess_active = true;
+		$editchangeuse_check = true;
+		include("include/edituser.inc.php");
+		$msg = edituser();;
+    }
+	
+	if(isset($_POST['editusersave'])) {
+		$shownaccess_active = true;
+		
+		include("include/edituser.inc.php");
+		$msg = editusersave();
     }
 	
 	sendCommand(255,255);
@@ -381,11 +396,14 @@ include('include/session.inc.php');
 						</tr>
 						<?php
 						}
-						?>
-					<tr>
-						<td colspan="2"><input type="submit" name="query" value="Query" "></td> 
-					</tr>
-					<?php
+						if ( !$editchangeuse_check)
+						{
+							?>
+							<tr>
+								<td colspan="2"><input type="submit" name="query" value="Query" "></td> 
+							</tr>
+							<?php
+						}
 					if ($access_row['Admin']) 
 						{
 						?>
@@ -396,12 +414,24 @@ include('include/session.inc.php');
 						}
 						else
 						{
-						?>
-							<tr>
-								<td colspan="2"><input type="submit" name="passwordchangeuser" value="Change Password" "></td> 	
-							</tr>
-							
-						<?php
+							if ( !$editchangeuse_check)
+							{
+								?>
+								<tr>
+									<td colspan="2"><input type="submit" name="passwordchangeuser" value="Change Password" "></td> 	
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" name="editchangeuser" value="Edit Info" "></td> 	
+								</tr>
+								
+								
+							<?php
+							  
+							}
+							$msg .= "<tr>\n";
+							$msg .= "	<td ><input type=\"submit\" name=\"goback\" value=\"Go Back To Main\" class=\"inputadmin\"></td> ";
+							$msg .= "</tr>\n";
+							echo $msg;
 						}
 						?>
 					

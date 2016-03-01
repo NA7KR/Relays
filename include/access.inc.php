@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_SESSION['login_user']))
 {
 	require_once("include/sqli.inc.php");			
@@ -99,4 +100,8 @@ if(isset($_SESSION['login_user']))
 		return $msg;
 	}
 }	
+else
+{
+	echo "no session";
+}
 ?>
