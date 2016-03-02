@@ -131,6 +131,7 @@
 		}
 	}
 	
+	
 	/******************
 	Show Access
 	******************/
@@ -405,5 +406,24 @@
 			}
 			// If the query is succesfully performed ($count not false)
 			if($count != false) return $count;       // Shows the number of affected rows
+	}
+	
+	function email_id($email)
+	{
+		$conn = connect();
+		try
+		{
+			$sql = "SELECT `id`, `username` FROM `Login` WHERE `Email`= :email AND `activated`='1' LIMIT 1";
+			$statement = $conn->prepare($sql);
+			$statement->bindParam(":email", $email);
+			$statement->execute();	
+			$result=$statement->fetch(PDO::FETCH_ASSOC);
+			$conn = null;        // Disconnect
+			return $result;	
+		}
+		catch(PDOException $e) 
+		{
+				return $e->getMessage();
+		}
 	}
 ?>

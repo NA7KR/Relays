@@ -282,7 +282,7 @@ include('include/session.inc.php');
 				{
 					if ($access_row['Relay 1']) 
 					{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r1 == "On")
 							{ 
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-off\" value=\"" . $name_row['Relay 1'] . "\" Class=\"inputtrue\"></td>\n";
@@ -290,12 +290,14 @@ include('include/session.inc.php');
 							else 
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r1-on\" value=\"" . $name_row['Relay 1'] . "\" Class=\"inputfalse\"></td>\n";
-								}				
-						echo "</tr>";	
+								}	
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";	
 					}
 					if ($access_row['Relay 2']) 
 					{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r2 == "On")
 							{
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-off\" value=\"" . $name_row['Relay 2'] . "\"  Class=\"inputtrue\"></td>\n";
@@ -304,11 +306,13 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r2-on\" value=\"" . $name_row['Relay 2'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay 3']) 
 					{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r3 == "On")
 							{
 								
@@ -318,11 +322,13 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r3-on\" value=\"" . $name_row['Relay 3'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay 4']) 
 						{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r4 == "On")
 							{
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-off\" value=\"" . $name_row['Relay 4'] . "\"  Class=\"inputtrue\"></td>\n";
@@ -331,11 +337,13 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r4-on\" value=\"" . $name_row['Relay 4'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay 5']) 
 					{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r5 == "On")
 							{
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-off\" value=\"" . $name_row['Relay 5'] . "\"  Class=\"inputtrue\"></td>\n";
@@ -344,11 +352,13 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r5-on\" value=\"" . $name_row['Relay 5'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay 6']) 
 					{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r6 == "On")
 							{
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-off\" value=\"" . $name_row['Relay 6'] . "\"  Class=\"inputtrue\"></td>\n";
@@ -357,11 +367,13 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r6-on\" value=\"" . $name_row['Relay 6'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay 7']) 
 						{
-							echo "<tr>";
+							echo "<tr>\n";
 							if ($r7 == "On")
 							{
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-off\" value=\"" . $name_row['Relay 7'] . "\"  Class=\"inputtrue\"></td>\n";
@@ -370,11 +382,13 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r7-on\" value=\"" . $name_row['Relay 7'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay 8']) 
 						{
-						echo "<tr>";
+						echo "<tr>\n";
 							if ($r8 == "On")
 							{
 								echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-off\" value=\"" . $name_row['Relay 8'] . "\"  Class=\"inputtrue\"></td>\n";
@@ -383,16 +397,24 @@ include('include/session.inc.php');
 								{
 									echo "<td colspan=\"2\"><input type=\"submit\" name=\"r8-on\" value=\"" . $name_row['Relay 8'] . "\"  Class=\"inputfalse\"></td>\n";
 								}
-						echo "</tr>";
+						echo "<td></td>\n";
+						echo "<td></td>\n";
+						echo "</tr>\n";
 					}
 					if ($access_row['Relay All']) 
 						{
 						?>
 						<tr>
-							<td><input type="submit" name="r9-on" value="All Relays On" "></td>
+							<td><input type="submit" name="r9-on" value="All Relays On"></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
-							<td><input type="submit" name="r9-off" value="All Relays Off" "></td> 	
+							<td><input type="submit" name="r9-off" value="All Relays Off"></td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<?php
 						}
@@ -400,7 +422,9 @@ include('include/session.inc.php');
 						{
 							?>
 							<tr>
-								<td colspan="2"><input type="submit" name="query" value="Query" "></td> 
+								<td colspan="2"><input type="submit" name="query" value="Query"></td> 
+								<td></td>
+								<td></td>
 							</tr>
 							<?php
 						}
@@ -408,7 +432,9 @@ include('include/session.inc.php');
 						{
 						?>
 						<tr>
-							<td colspan="2"><input type="submit" name="admin" value="Admin" "></td> 
+							<td colspan="2"><input type="submit" name="admin" value="Admin"></td> 
+							<td></td>
+							<td></td>
 						</tr>
 						<?php
 						}
@@ -418,10 +444,10 @@ include('include/session.inc.php');
 							{
 								?>
 								<tr>
-									<td colspan="2"><input type="submit" name="passwordchangeuser" value="Change Password" "></td> 	
+									<td colspan="2"><input type="submit" name="passwordchangeuser" value="Change Password" ></td> 	
 								</tr>
 								<tr>
-									<td colspan="2"><input type="submit" name="editchangeuser" value="Edit Info" "></td> 	
+									<td colspan="2"><input type="submit" name="editchangeuser" value="Edit Info" ></td> 	
 								</tr>
 								
 								
@@ -429,7 +455,7 @@ include('include/session.inc.php');
 							  
 							}
 							$msg .= "<tr>\n";
-							$msg .= "	<td ><input type=\"submit\" name=\"goback\" value=\"Go Back To Main\" class=\"inputadmin\"></td> ";
+							$msg .= "	<td ><input type=\"submit\" name=\"goback\" value=\"Go Back To Main\" class=\"inputadmin\"></td>\n ";
 							$msg .= "</tr>\n";
 							echo $msg;
 						}

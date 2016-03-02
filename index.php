@@ -10,23 +10,34 @@
         }
         else
         {
-            // Define $username and $password
-            $username=$_POST['username'];
-            $password=$_POST['password'];      
-			
-			$encrypt_password="*" . sha1(sha1($password,true));
-			$rows = userpassword($username,$encrypt_password) ;
-			
-            if ($rows == 1) {
-                    $_SESSION['login_user']=$username; // Initializing Session
-                    header("location: profile.php"); // Redirecting To Other Page
-                    } 
-                    else 
-                    {
-                            $error = "Username or Password is invalid";	
-                    }              
+			if (isset($_POST['CSRFtoken'], $_COOKIE['CSRFtoken']))
+			{
+				if ($_POST['CSRFtoken'] == $_COOKIE['CSRFtoken'])
+				{
+					// Define $username and $password
+					$username=$_POST['username'];
+					$password=$_POST['password'];      
+					
+					$encrypt_password="*" . sha1(sha1($password,true));
+					$rows = userpassword($username,$encrypt_password) ;
+					
+					if ($rows == 1) {
+						$_SESSION['login_user']=$username; // Initializing Session
+						header("location: profile.php"); // Redirecting To Other Page
+						} 
+						else 
+						{
+							$error = "Username or Password is invalid";	
+						}
+				}
+			}
         }
     }
+	else
+	{
+		$token = bin2hex(openssl_random_pseudo_bytes(16));
+        setcookie("CSRFtoken", $token, time() + 60 * 60 * 24);
+	}
 
 if(isset($_SESSION['login_user'])){
 header("location: profile.php");
@@ -37,6 +48,7 @@ header("location: profile.php");
     <head>
     <title>Login Form</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="X-Frame-Options" content="deny">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     </head>
     <body>
@@ -73,6 +85,7 @@ header("location: profile.php");
 							<td  colspan="2"><span><?php echo $error; ?></span></td>
 						</tr>
 					</table>
+					<input name="CSRFtoken" type="hidden" value="<?php echo $token ?>">
 					<br>	
 						
                 </form>

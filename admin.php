@@ -96,6 +96,7 @@
 		header("Location: profile.php"); // Redirecting To main
 	}
 ?>
+<!DOCTYPE html>
 <html>
     <head>
 <?php include("include/java.inc.php"); ?>
@@ -180,4 +181,4 @@
 			</table>
 		</form>
 	</body>
-<html>
+</html>
