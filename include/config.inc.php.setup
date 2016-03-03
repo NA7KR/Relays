@@ -1,8 +1,12 @@
 <?php
+	//email from addess
+	$from = "auto_responder@yoursite.com";
+	//site = "https://relays.mysite.com"; can be http
+	$site = "https://relays.mysite.com";
 
-$dbusername = "root";
-$dbpassword = "Password";
-$dbdatabase = "Relay";
-$dbhost = "localhost";
+	$dbusername = "root";
+	$dbpassword = "Password";
+	$dbdatabase = "Relay";
+	$dbhost = "localhost";
 
 ?>

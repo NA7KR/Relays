@@ -180,5 +180,6 @@
 				</tr>
 			</table>
 		</form>
+		<?php include_once("include/pageBottom.php"); ?>
 	</body>
 </html>

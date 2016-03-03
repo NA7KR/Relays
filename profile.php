@@ -467,5 +467,6 @@ include('include/session.inc.php');
             </table> 
 			<input type="hidden" value="<?php echo $login_session; ?>" name="username" />
         </form>
+		<?php include_once("include/pageBottom.php"); ?>
     </body>
 </html>

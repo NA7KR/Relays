@@ -4,6 +4,7 @@
     $error=''; // Variable To Store Error Message
     if (isset($_POST['submit'])) 
     {
+		
         if (empty($_POST['username']) || empty($_POST['password'])) 
         {
                 $error = "Username or Password is invalid";
@@ -21,10 +22,24 @@
 					$encrypt_password="*" . sha1(sha1($password,true));
 					$rows = userpassword($username,$encrypt_password) ;
 					
-					if ($rows == 1) {
-						$_SESSION['login_user']=$username; // Initializing Session
-						header("location: profile.php"); // Redirecting To Other Page
-						} 
+									
+					if ($rows == 1) 
+					{
+						$sql = "SELECT `activated` FROM Login WHERE `username`  = '$username' AND `ChangePassword` = 1 ";
+						$cprows = querysql($sql);
+						
+						if ($cprows['activated'] == 1)
+						{
+							$error .= "Change Password";
+							$sql = "UPDATE `Login` SET `ChangePassword`='0' WHERE `username`='$username' ";
+							querysql($sql);
+						}
+						else
+						{
+							$_SESSION['login_user']=$username; // Initializing Session
+							header("location: profile.php"); // Redirecting To Other Page
+						}
+					} 
 						else 
 						{
 							$error = "Username or Password is invalid";	
@@ -32,13 +47,14 @@
 				}
 			}
         }
+		
     }
 	else
 	{
 		$token = bin2hex(openssl_random_pseudo_bytes(16));
         setcookie("CSRFtoken", $token, time() + 60 * 60 * 24);
 	}
-
+	
 if(isset($_SESSION['login_user'])){
 header("location: profile.php");
 }
@@ -48,7 +64,6 @@ header("location: profile.php");
     <head>
     <title>Login Form</title>
     <link href="style.css" rel="stylesheet" type="text/css">
-	<meta http-equiv="X-Frame-Options" content="deny">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     </head>
     <body>
@@ -75,14 +90,14 @@ header("location: profile.php");
 							<td  colspan="2"><span>  </span></td>
 						</tr>
 						<tr>
-							<td  colspan="2"><span>  </span></td>
-						</tr>
-						<tr>
 							<td  colspan="2"><input name="submit" type="submit" value="Login" ></td>
 						</tr>
 						
 						<tr>
 							<td  colspan="2"><span><?php echo $error; ?></span></td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="<?php echo $site . "/forgotpassword.php"?>">Reset Password</a></td>
 						</tr>
 					</table>
 					<input name="CSRFtoken" type="hidden" value="<?php echo $token ?>">
@@ -91,5 +106,6 @@ header("location: profile.php");
                 </form>
         </div>
         </div>
+		<?php include_once("include/pageBottom.php"); ?>
     </body>
 </html>
