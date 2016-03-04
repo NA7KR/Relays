@@ -7,7 +7,9 @@
 		exit();
 	}
 
-	// AJAX CALLS THIS CODE TO EXECUTE
+	/******************
+	AJAX CALLS THIS CODE TO EXECUTE
+	******************/
 	if(isset($_POST["email"]))
 	{
 		
@@ -15,47 +17,79 @@
 		$row = email_id($email);
 		if($row > 0)
 		{
-			$id = $row["id"];
-			$username = $row["username"];
-			$emailcut = substr($email, 0, 4);
-			$randNum = rand(10000,99999);
-			$tempPass = "$emailcut$randNum";
-			$encrypt_password="*" . sha1(sha1($tempPass,true));
-			savepasswordmysql($username,$encrypt_password);
-			$sql = "UPDATE `Login` SET `temp_pass`='$encrypt_password' WHERE `username`='$username' LIMIT 1";
-			querysql($sql);
-			$to = "$email";
-			
+			$ip = get_ip();
+			$sql = "SELECT `Tries`,`IP_Address`,COUNT('') as 'Attempts' FROM `Security` Where `IP_Address` = '$ip' AND `Tries` = 1 Group By `IP_Address`,`Tries`";
+			$attemptrow = querysql($sql);
+			$Attempts = $attemptrow["Attempts"];
 			$headers ="From: $from\n";
 			$headers .= "MIME-Version: 1.0\n";
 			$headers .= "Content-type: text/html; charset=iso-8859-1 \n";
-			$subject ="Temporary Password";
-			$msg = '<h2>Hello '. $username .'</h2><p>This is an automated message from yoursite. If you did not recently initiate the Forgot Password process, please disregard this email.</p><p>You indicated that you forgot your login password. We can generate a temporary password for you to log in with, then once logged in you can change your password to anything you like.</p><p>After you click the link below your password to login will be:<br /><b>'.$tempPass.'</b></p><p><a href="https://relay.na7kr.us/forgotpassword.php?u='.$username.'&p='.$encrypt_password.'">Click here now to apply the temporary password shown below to your account</a></p><p>If you do not click the link in this email, no changes will be made to your account. In order to set your login password to the temporary password you must click the link above.</p>';
-			if(mail($to,$subject,$msg,$headers)) {
-				$msg = "<h3>Sent Email.</h3>";
-				$msg .= "<br>";
-				html_function("Reset Password",$msg,$site);
-				exit();
-			} else {
+			$id = $row["id"];
+			$username = $row["username"];
+			if ($Attempts < 3)
+			{
+				$emailcut = substr($email, 0, 4);
+				$randNum = rand(10000,99999);
+				$tempPass = "$emailcut$randNum";
+				$encrypt_password="*" . sha1(sha1($tempPass,true));
+				savepasswordmysql($username,$encrypt_password);
+				$sql = "UPDATE `Login` SET `temp_pass`='$encrypt_password' WHERE `username`='$username' LIMIT 1";
+				querysql($sql);
+				
+				$sql = "INSERT INTO `Security` ( `IP_Address`, `Action`,`Username`) VALUES ( '$ip', 'Reset','$username')";
+				querysql($sql);
+				$to = "$email";
+				$subject ="Temporary Password";
+				$msg = '<h2>Hello '. $username .'</h2><p>This is an automated message from yoursite. If you did not recently initiate the Forgot Password process, please disregard this email.</p><p>You indicated that you forgot your login password. We can generate a temporary password for you to log in with, then once logged in you can change your password to anything you like.</p><p>After you click the link below your password to login will be:<br /><b>'.$tempPass.'</b></p><p><a href="https://relay.na7kr.us/forgotpassword.php?u='.$username.'&p='.$encrypt_password.'">Click here now to apply the temporary password shown below to your account</a></p><p>If you do not click the link in this email, no changes will be made to your account. In order to set your login password to the temporary password you must click the link above.</p>';
+				if(mail($to,$subject,$msg,$headers)) {
+					$msg = "<h3>Sent Email.</h3>";
+					$msg .= "<br>";
+					html_function("Reset Password",$msg,$site);
+					session_destroy();
+					exit();
+				} 
+				else 
+				{
+					$msg = "<h3>Failed</h3>";
+					$msg .= "<br>";
+					html_function("Reset Password",$msg,$site);
+					session_destroy();
+					exit();
+				}
+			}
+			else
+			{
+				$sql = "UPDATE `Login` SET `activated`='0' WHERE `username`='$username' LIMIT 1";
+				querysql($sql);
+				$subject ="Locked out";
+				$emsg = "User " . $username . " with IP " . $ip . " Is locked out";
+				if(mail($email,$subject,$emsg,$headers)) 
 				$msg = "<h3>Failed</h3>";
 				$msg .= "<br>";
-				html_function("Reset Password",$msg,$site);
+				$msg .= "<h3>The admin has beed emailed that your locked out.</h3>";
+				$msg .= "<br>";
+				html_function("Locked out",$msg,$site);
+				session_destroy();
 				exit();
 			}
 		} else {
 			$msg = "<h3>User not found</h3>";
 				$msg .= "<br>";
 				html_function("Reset Password",$msg,$site);
+				session_destroy();
 				exit();
 		}
 		exit();
 	}
 
-	// EMAIL LINK CLICK CALLS THIS CODE TO EXECUTE
+	/******************
+	EMAIL LINK CLICK CALLS THIS CODE TO EXECUTE
+	******************/
 	if(isset($_GET['u']) && isset($_GET['p'])){
 		$u =  $_GET['u'];
 		$temppasshash =  $_GET['p'];
 		if(strlen($temppasshash) < 10){
+			session_destroy();
 			exit();
 		}
 		
@@ -79,8 +113,7 @@
 			$msg .=	"<h3>Please login with password or reset.</h3>";
 			$msg .=	"<br>";
 			html_function("Password not reset Password",$msg,$site);
-			
-			
+			session_destroy();	
 			exit();
 		} else {
 			
@@ -95,10 +128,14 @@
 			$msg = "<h3>Please login with new password.</h3>";
 			$msg .= "<br>";
 			html_function("Reset Password",$msg,$site);
+			session_destroy();
 			exit();
 		}
 	}
 	
+	/******************
+	HTML Code
+	******************/
 	function html_function($tile,$msg,$site)
 	{
 		?>
@@ -129,6 +166,39 @@
 			</html>
 		<?php
 	}
+	
+	/******************
+	Get IP
+	******************/
+	function get_ip() 
+	{
+		//Just get the headers if we can or else use the SERVER global
+		if ( function_exists( 'apache_request_headers' ) ) 
+		{
+			$headers = apache_request_headers();
+		} 
+		else 
+			{
+				$headers = $_SERVER;
+			}
+		//Get the forwarded IP if it exists
+		if ( array_key_exists( 'X-Forwarded-For', $headers ) && filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) 
+		{
+			$the_ip = $headers['X-Forwarded-For'];
+		} 
+		elseif 
+			( 
+				array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) && filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 )
+			) 
+			{
+				$the_ip = $headers['HTTP_X_FORWARDED_FOR'];
+			} 
+		else 
+		{
+			$the_ip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
+		}
+		return $the_ip;
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -140,7 +210,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	</head>
 	<body>
-
 		<div id="pageMiddle">
 			<div id="main">
             <h1>Forgotten Password</h1>

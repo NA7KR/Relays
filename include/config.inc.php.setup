@@ -3,6 +3,8 @@
 	$from = "auto_responder@yoursite.com";
 	//site = "https://relays.mysite.com"; can be http
 	$site = "https://relays.mysite.com";
+	//admin email
+	$email = "kevin@mysite.com";
 
 	$dbusername = "root";
 	$dbpassword = "Password";

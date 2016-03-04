@@ -17,32 +17,43 @@
 				{
 					// Define $username and $password
 					$username=$_POST['username'];
-					$password=$_POST['password'];      
-					
-					$encrypt_password="*" . sha1(sha1($password,true));
-					$rows = userpassword($username,$encrypt_password) ;
-					
-									
-					if ($rows == 1) 
+					$password=$_POST['password'];  
+					//Check if locked out
+					$sql = "SELECT * FROM `Login` WHERE `activated`='1' and `username`='$username' LIMIT 1";
+					$notlocked = querysql($sql);
+					if ($notlocked > 0)
 					{
-						$sql = "SELECT `activated` FROM Login WHERE `username`  = '$username' AND `ChangePassword` = 1 ";
-						$cprows = querysql($sql);
-						
-						if ($cprows['activated'] == 1)
+						$encrypt_password="*" . sha1(sha1($password,true));
+						$rows = userpassword($username,$encrypt_password) ;
+										
+						if ($rows == 1) 
 						{
-							$error .= "Change Password";
-							$sql = "UPDATE `Login` SET `ChangePassword`='0' WHERE `username`='$username' ";
-							querysql($sql);
-						}
+							$sql = "SELECT `activated` FROM Login WHERE `username`  = '$username' AND `ChangePassword` = 1 ";
+							$cprows = querysql($sql);
+							if ($cprows['activated'] == 1)
+							{
+								$error .= "Change Password";
+								$sql = "UPDATE `Login` SET `ChangePassword`='0' WHERE `username`='$username' ";
+								querysql($sql);
+							}
+							else
+								{
+									$_SESSION['login_user']=$username; // Initializing Session
+									header("location: profile.php"); // Redirecting To Other Page
+								}
+						} 
+							else 
+							{
+								session_destroy();
+								setcookie("CSRFtoken", "", time()-3600);
+								$error = "Username or Password is invalid";	
+							}
+					}
 						else
 						{
-							$_SESSION['login_user']=$username; // Initializing Session
-							header("location: profile.php"); // Redirecting To Other Page
-						}
-					} 
-						else 
-						{
-							$error = "Username or Password is invalid";	
+							session_destroy();
+							setcookie("CSRFtoken", "", time()-3600);
+							$error = "Locked out or not found";	
 						}
 				}
 			}
