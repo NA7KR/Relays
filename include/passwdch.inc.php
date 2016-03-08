@@ -38,8 +38,15 @@ if(isset($_SESSION['login_user']))
 		$username=$_POST['username'];
 		$password=$_POST['password1'];      
 		$encrypt_password="*" . sha1(sha1($password,true));
-		$msg = savepasswordmysql($username,$encrypt_password);
-		$msg .= "Saved " .  $_POST['username']  ;
+		$save = savepasswordmysql($username,$encrypt_password);
+		if ($save =="1")
+		{
+			$msg = "Saved " .  $_POST['username']  ;
+		}
+		else 
+			{
+				$msg = "Failed";
+			}
 		return $msg;
 	}
 	
