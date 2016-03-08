@@ -32,7 +32,7 @@
 				$randNum = rand(10000,99999);
 				$tempPass = "$emailcut$randNum";
 				$encrypt_password="*" . sha1(sha1($tempPass,true));
-				savepasswordmysql($username,$encrypt_password);
+				//savepasswordmysql($username,$encrypt_password);
 				$sql = "UPDATE `Login` SET `temp_pass`='$encrypt_password' WHERE `username`='$username' LIMIT 1";
 				querysql($sql);
 				
@@ -45,7 +45,6 @@
 					$msg = "<h3>Sent Email.</h3>";
 					$msg .= "<br>";
 					html_function("Reset Password",$msg,$site);
-					session_destroy();
 					exit();
 				} 
 				else 
@@ -53,7 +52,6 @@
 					$msg = "<h3>Failed</h3>";
 					$msg .= "<br>";
 					html_function("Reset Password",$msg,$site);
-					session_destroy();
 					exit();
 				}
 			}
@@ -69,14 +67,12 @@
 				$msg .= "<h3>The admin has beed emailed that your locked out.</h3>";
 				$msg .= "<br>";
 				html_function("Locked out",$msg,$site);
-				session_destroy();
 				exit();
 			}
 		} else {
 			$msg = "<h3>User not found</h3>";
 				$msg .= "<br>";
 				html_function("Reset Password",$msg,$site);
-				session_destroy();
 				exit();
 		}
 		exit();
@@ -85,14 +81,14 @@
 	/******************
 	EMAIL LINK CLICK CALLS THIS CODE TO EXECUTE
 	******************/
-	if(isset($_GET['u']) && isset($_GET['p'])){
+	if(isset($_GET['u']) && isset($_GET['p']))
+	{
 		$u =  $_GET['u'];
 		$temppasshash =  $_GET['p'];
 		if(strlen($temppasshash) < 10){
 			session_destroy();
 			exit();
 		}
-		
 		$sql = "SELECT `id` FROM `Login` WHERE `username` = '$u' AND `temp_pass` = '$temppasshash' ";
 		$access_row = querysql($sql);
 		
@@ -113,7 +109,6 @@
 			$msg .=	"<h3>Please login with password or reset.</h3>";
 			$msg .=	"<br>";
 			html_function("Password not reset Password",$msg,$site);
-			session_destroy();	
 			exit();
 		} else {
 			
@@ -128,7 +123,6 @@
 			$msg = "<h3>Please login with new password.</h3>";
 			$msg .= "<br>";
 			html_function("Reset Password",$msg,$site);
-			session_destroy();
 			exit();
 		}
 	}

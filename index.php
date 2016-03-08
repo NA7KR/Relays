@@ -12,7 +12,7 @@
         else
         {
 			if (isset($_POST['CSRFtoken'], $_COOKIE['CSRFtoken']))
-			{
+			{	
 				if ($_POST['CSRFtoken'] == $_COOKIE['CSRFtoken'])
 				{
 					// Define $username and $password
@@ -25,16 +25,18 @@
 					{
 						$encrypt_password="*" . sha1(sha1($password,true));
 						$rows = userpassword($username,$encrypt_password) ;
+						$sql = "UPDATE `Security` SET `Tries`='0' WHERE `username`='$username' and  `Tries`='1'";
+						querysql($sql);
 										
 						if ($rows == 1) 
 						{
 							$sql = "SELECT `activated` FROM Login WHERE `username`  = '$username' AND `ChangePassword` = 1 ";
 							$cprows = querysql($sql);
 							if ($cprows['activated'] == 1)
-							{
-								$error .= "Change Password";
-								$sql = "UPDATE `Login` SET `ChangePassword`='0' WHERE `username`='$username' ";
-								querysql($sql);
+							{	
+								$_SESSION['username'] = $username;
+								$_SESSION['active'] = true;
+								$error .= "<a href=\"http://relay.na7kr.us/pwchange.php\" onclick=\"javascript:void window.open('http://relay.na7kr.us/pwchange.php','1457384969085','width=750,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=0,resizable=1,left=0,top=0');return false;\">You must change password!</a>";
 							}
 							else
 								{
@@ -44,15 +46,11 @@
 						} 
 							else 
 							{
-								session_destroy();
-								setcookie("CSRFtoken", "", time()-3600);
 								$error = "Username or Password is invalid";	
 							}
 					}
 						else
 						{
-							session_destroy();
-							setcookie("CSRFtoken", "", time()-3600);
 							$error = "Locked out or not found";	
 						}
 				}
@@ -64,11 +62,17 @@
 	{
 		$token = bin2hex(openssl_random_pseudo_bytes(16));
         setcookie("CSRFtoken", $token, time() + 60 * 60 * 24);
+		$_SESSION['token'] = $token;
 	}
 	
 if(isset($_SESSION['login_user'])){
 header("location: profile.php");
 }
+
+if(isset($_SESSION['token'])){
+$token = $_SESSION['token'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
