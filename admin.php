@@ -24,7 +24,7 @@
 		$msg = showrelaynames();
 		$saved = savepostrelaynames();
     }
-	if(isset($_POST['saveaccess'])) {
+	if(isset($_POST['savepostaccess'])) {
 		$shownaccess_active = true;
 		include("include/access.inc.php");
 		$saved = savepostaccess();
