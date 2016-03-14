@@ -8,78 +8,6 @@
 	if(isset($_POST['goback'])) {
         header("Location: profile.php"); // Redirecting To main
     }
-	if(isset($_POST['showusers'])) {
-		$showusers_active =true;
-		$msg = showusers_change();
-    }
-   
-    if(isset($_POST['shownames'])) {
-		$shownames_active = true;
-		include("include/relay.inc.php");
-		$msg = showrelaynames();
-    }
-	if(isset($_POST['save'])) {
-		$shownames_active = true;
-		include("include/relay.inc.php");
-		$msg = showrelaynames();
-		$saved = savepostrelaynames();
-    }
-	if(isset($_POST['savepostaccess'])) {
-		$shownaccess_active = true;
-		include("include/access.inc.php");
-		$saved = savepostaccess();
-    }
-	
-	 if(isset($_POST['shownaccess'])) {
-		$shownaccess_active = true;
-		$msg = showusers_access();
-    }
-	
-	 if(isset($_POST['changepassword'])) {
-		$shownaccess_active = true;
-		include("include/passwdch.inc.php");
-		$msg = passwordchange();
-    }
-	
-	if(isset($_POST['savepasswd'])) {
-		$shownaccess_active = true;
-		include("include/passwdch.inc.php");
-		$msg = passwordsave();
-    }
-	
-	if(isset($_POST['deluser'])) {
-		$shownaccess_active = true;
-		include("include/deluser.inc.php");
-		$msg = deluser();
-    }
-	
-	if(isset($_POST['adduser'])) {
-		$shownaccess_active = true;
-		include("include/adduser.inc.php");
-		$msg = adduser();
-    }
-	
-	if(isset($_POST['deleteuser'])) {
-		$shownaccess_active = true;
-		include("include/deluser.inc.php");
-		$msg = deleteduser();
-    }
-
-	if(isset($_POST['edituser'])) {
-		$shownaccess_active = true;
-		include("include/edituser.inc.php");
-		$msg = edituser();
-    }
-	if(isset($_POST['adduserpost'])) {
-		$shownaccess_active = true;
-		include("include/adduser.inc.php");
-		$msg = adduserpost();
-    }
-	if(isset($_POST['editusersave'])) {
-		$shownaccess_active = true;
-		include("include/edituser.inc.php");
-		$msg = editusersave();
-    }
 	
 	
 	/******************
@@ -89,7 +17,78 @@
 	//end access save as array $access_row
 	if ($access_row['Admin']) 
 	{
-	
+			if(isset($_POST['showusers'])) {
+			$showusers_active =true;
+			$msg = showusers_change();
+		}
+	   
+		if(isset($_POST['shownames'])) {
+			$shownames_active = true;
+			include("include/relay.inc.php");
+			$msg = showrelaynames();
+		}
+		if(isset($_POST['save'])) {
+			$shownames_active = true;
+			include("include/relay.inc.php");
+			$msg = showrelaynames();
+			$saved = savepostrelaynames();
+		}
+		if(isset($_POST['savepostaccess'])) {
+			$shownaccess_active = true;
+			include("include/access.inc.php");
+			$saved = savepostaccess();
+		}
+		
+		 if(isset($_POST['shownaccess'])) {
+			$shownaccess_active = true;
+			$msg = showusers_access();
+		}
+		
+		 if(isset($_POST['changepassword'])) {
+			$shownaccess_active = true;
+			include("include/passwdch.inc.php");
+			$msg = passwordchange();
+		}
+		
+		if(isset($_POST['savepasswd'])) {
+			$shownaccess_active = true;
+			include("include/passwdch.inc.php");
+			$msg = passwordsave();
+		}
+		
+		if(isset($_POST['deluser'])) {
+			$shownaccess_active = true;
+			include("include/deluser.inc.php");
+			$msg = deluser();
+		}
+		
+		if(isset($_POST['adduser'])) {
+			$shownaccess_active = true;
+			include("include/adduser.inc.php");
+			$msg = adduser();
+		}
+		
+		if(isset($_POST['deleteuser'])) {
+			$shownaccess_active = true;
+			include("include/deluser.inc.php");
+			$msg = deleteduser();
+		}
+
+		if(isset($_POST['edituser'])) {
+			$shownaccess_active = true;
+			include("include/edituser.inc.php");
+			$msg = edituser();
+		}
+		if(isset($_POST['adduserpost'])) {
+			$shownaccess_active = true;
+			include("include/adduser.inc.php");
+			$msg = adduserpost();
+		}
+		if(isset($_POST['editusersave'])) {
+			$shownaccess_active = true;
+			include("include/edituser.inc.php");
+			$msg = editusersave();
+		}
 	}
 	else
 	{
