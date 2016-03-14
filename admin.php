@@ -8,8 +8,7 @@
 	if(isset($_POST['goback'])) {
         header("Location: profile.php"); // Redirecting To main
     }
-	
-	
+		
 	/******************
 	Check if Admin
 	******************/
