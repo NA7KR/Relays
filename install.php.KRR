@@ -1,0 +1,20 @@
+<?php
+	require_once("include/sqli.inc.php");	
+	$filename = 'include/sql.sql';
+	$op_data = '';
+	$lines = file($filename);
+	foreach ($lines as $line)
+	{
+		if (substr($line, 0, 2) == '--' || $line == '')
+		{
+			continue;
+		}
+		$op_data .= $line;
+		if (substr(trim($line), -1, 1) == ';')
+		{
+			querysql($op_data);
+			$op_data = '';
+		}
+	}
+	echo "Table Created Inside " . $database . " Database.......";
+?>

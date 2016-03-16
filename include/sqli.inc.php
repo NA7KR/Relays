@@ -16,11 +16,54 @@
 			$conn = new PDO("mysql:host=$dbhost; dbname=$dbdatabase", $dbusername, $dbpassword);
 			$conn->exec("SET CHARACTER SET utf8");      // Sets encoding UTF-8
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
 			return $conn;
 		}
 	catch(PDOException $e) 
 		{
-			return $e->getMessage();
+			echo "Create Database or check user name /password";
+			die('Error: '.$e->getMessage().' Code: '.$e->getCode());
+			
+		}
+	}
+	
+	/******************
+	Check if Tables exists 
+	******************/
+	function tableExists( $tableName) 
+	{
+		
+		$conn = connect();
+		$mrSql = "SHOW TABLES LIKE :table_name";
+		$mrStmt = $conn->prepare($mrSql);
+		//protect from injection attacks
+		$mrStmt->bindParam(":table_name", $tableName, PDO::PARAM_STR);
+
+		$sqlResult = $mrStmt->execute();
+		if ($sqlResult) 
+		{
+			$row = $mrStmt->fetch(PDO::FETCH_NUM);
+			if ($row[0]) 
+			{
+				//table was found
+				echo "Table " . $tableName . " Was  found <br>";
+				$conn = null;        // Disconnect
+				return true;
+			} else 
+			{
+				//table was not found
+				$conn = null;        // Disconnect
+				echo "Table " . $tableName . " Was not found <br>";
+				echo "Please run http://" . $_SERVER["SERVER_NAME"] ."/install.php<br>";
+				exit;
+				//return false;
+			}
+		} else 
+		{
+			//some PDO error occurred
+			echo("Could not check if table exists, Error: ".var_export($pdo->errorInfo(), true));
+			$conn = null;        // Disconnect
+			return false;
 		}
 	}
 	
