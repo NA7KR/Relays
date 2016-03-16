@@ -5,5 +5,8 @@ Need a linux system running Apache and MYSQL.
 
 Please see my page http://remote.na7kr.us
 
+Rename install.php.KRR to install.php t install the tables.
+Then Delete it.
+
 
 Kevin
